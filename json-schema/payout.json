@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/dlocal/main/json-schema/payout.json",
+  "title": "dLocal Payout",
+  "description": "A disbursement sent to a recipient in an emerging market country via dLocal.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "dLocal payout identifier",
+      "example": "PO-123456789"
+    },
+    "request_id": {
+      "type": "string",
+      "description": "Merchant-assigned unique request identifier"
+    },
+    "amount": {
+      "type": "number",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "country": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "payment_method_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["PENDING", "PROCESSING", "PAID", "REJECTED", "CANCELLED", "HELD"]
+    },
+    "status_code": {
+      "type": "string"
+    },
+    "status_detail": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "transaction_id": {
+      "type": "string"
+    },
+    "beneficiary": {
+      "$ref": "#/definitions/Beneficiary"
+    }
+  },
+  "required": ["id", "request_id", "amount", "currency", "country", "status"],
+  "definitions": {
+    "Beneficiary": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "lastname": { "type": "string" },
+        "document": { "type": "string" },
+        "document_type": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "bank_account": {
+          "$ref": "#/definitions/BankAccount"
+        }
+      },
+      "required": ["name", "document"]
+    },
+    "BankAccount": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["C", "S"],
+          "description": "C=Checking, S=Savings"
+        },
+        "number": { "type": "string" },
+        "agency": { "type": "string" },
+        "bank_code": { "type": "string" },
+        "clabe": { "type": "string" },
+        "iban": { "type": "string" }
+      }
+    }
+  }
+}

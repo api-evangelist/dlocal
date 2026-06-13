@@ -1,0 +1,75 @@
+{
+  "summary": "Create a card payment in Brazil",
+  "description": "Example request to create a direct card payment in Brazil using a tokenized card.",
+  "request": {
+    "method": "POST",
+    "url": "https://api.dlocal.com/payments",
+    "headers": {
+      "X-Date": "2026-06-13T00:00:00.000Z",
+      "X-Login": "your_x_login",
+      "X-Trans-Key": "your_x_trans_key",
+      "X-Version": "2.1",
+      "Content-Type": "application/json",
+      "Authorization": "V2-HMAC-SHA256, Signature: {computed_signature}"
+    },
+    "body": {
+      "amount": 100.00,
+      "currency": "BRL",
+      "payment_method_id": "CARD",
+      "payment_method_flow": "DIRECT",
+      "country": "BR",
+      "payer": {
+        "name": "Maria Silva",
+        "email": "maria@example.com",
+        "document": "12345678901",
+        "document_type": "CPF",
+        "address": {
+          "street": "Avenida Paulista",
+          "number": "1234",
+          "city": "São Paulo",
+          "state": "SP",
+          "zip_code": "01310-100",
+          "country": "BR"
+        }
+      },
+      "card": {
+        "card_id": "CV-e90078f7-e027-4ce4-84cb-534c877be33c"
+      },
+      "order_id": "ORDER-001",
+      "description": "Electronics purchase",
+      "notification_url": "https://webhook.site/notification",
+      "callback_url": "https://example.com/callback"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "PAY_GWLP5LSWQP9AXGBVPFZN",
+      "amount": 100.00,
+      "currency": "BRL",
+      "payment_method_id": "CARD",
+      "payment_method_flow": "DIRECT",
+      "country": "BR",
+      "payer": {
+        "name": "Maria Silva",
+        "email": "maria@example.com",
+        "document": "12345678901"
+      },
+      "order_id": "ORDER-001",
+      "description": "Electronics purchase",
+      "status": "PAID",
+      "status_code": "200",
+      "status_detail": "The payment was paid.",
+      "created_date": "2026-06-13T10:00:00.000Z",
+      "approved_date": "2026-06-13T10:00:05.000Z",
+      "card": {
+        "holder_name": "Maria Silva",
+        "last4": "1111",
+        "brand": "VISA",
+        "expiration_month": 12,
+        "expiration_year": 2028,
+        "card_id": "CV-e90078f7-e027-4ce4-84cb-534c877be33c"
+      }
+    }
+  }
+}

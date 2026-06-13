@@ -1,0 +1,828 @@
+openapi: 3.0.3
+info:
+  title: dLocal Payins API
+  description: >
+    Accept payments from customers in emerging markets using 1,000+ local payment methods
+    including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure,
+    installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
+  version: "2.1"
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+  termsOfService: https://www.dlocal.com/terms-of-service/
+servers:
+  - url: https://api.dlocal.com
+    description: Production
+  - url: https://sandbox.dlocal.com
+    description: Sandbox
+security:
+  - HmacAuth: []
+paths:
+  /payments:
+    post:
+      summary: Create a Payment
+      description: >
+        Create a new payment using a card_id or token. For payments with raw card
+        data use /secure_payments instead.
+      operationId: createPayment
+      tags:
+        - Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentRequest'
+            example:
+              amount: 100.00
+              currency: "USD"
+              payment_method_id: "CARD"
+              payment_method_flow: "DIRECT"
+              country: "BR"
+              payer:
+                name: "John Doe"
+                email: "john@example.com"
+                document: "12345678901"
+              card:
+                card_id: "CV-e90078f7-e027-4ce4-84cb-534c877be33c"
+              order_id: "5346523564"
+              description: "Electronics purchase"
+              notification_url: "https://webhook.site/notification"
+              callback_url: "https://example.com/callback"
+      responses:
+        "200":
+          description: Payment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /secure_payments:
+    post:
+      summary: Create a Secure Payment (with Card Data)
+      description: >
+        Create a payment passing raw card data (number, expiration, CVV).
+        Requires PCI DSS compliance.
+      operationId: createSecurePayment
+      tags:
+        - Payments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentRequest'
+            example:
+              amount: 100.00
+              currency: "USD"
+              payment_method_id: "CARD"
+              payment_method_flow: "DIRECT"
+              country: "BR"
+              payer:
+                name: "John Doe"
+                email: "john@example.com"
+                document: "12345678901"
+              card:
+                holder_name: "John Doe"
+                number: "4111111111111111"
+                cvv: "123"
+                expiration_month: 12
+                expiration_year: 2028
+              order_id: "5346523564"
+              description: "Electronics purchase"
+              notification_url: "https://webhook.site/notification"
+      responses:
+        "200":
+          description: Payment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /payments/{payment_id}:
+    get:
+      summary: Retrieve a Payment
+      description: Get the status and details of a specific payment.
+      operationId: getPayment
+      tags:
+        - Payments
+      parameters:
+        - name: payment_id
+          in: path
+          required: true
+          description: Unique payment identifier
+          schema:
+            type: string
+            example: "PAY_GWLP5LSWQP9AXGBVPFZN"
+      responses:
+        "200":
+          description: Payment retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        "404":
+          description: Payment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /payments/merchant_order_id/{order_id}:
+    get:
+      summary: Retrieve a Payment by Order ID
+      description: Retrieve payment details using the merchant's own order identifier.
+      operationId: getPaymentByOrderId
+      tags:
+        - Payments
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          description: Merchant order identifier
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Payment retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+  /payments/{payment_id}/cancel:
+    post:
+      summary: Cancel a Payment
+      description: Cancel a pending payment that has not yet been completed.
+      operationId: cancelPayment
+      tags:
+        - Payments
+      parameters:
+        - name: payment_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Payment cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+  /refunds:
+    post:
+      summary: Create a Refund
+      description: >
+        Reverse a card payment or initiate a bank transfer for alternative payment methods.
+      operationId: createRefund
+      tags:
+        - Refunds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRefundRequest'
+            example:
+              payment_id: "PAY_GWLP5LSWQP9AXGBVPFZN"
+              amount: 50.00
+              currency: "USD"
+              notification_url: "https://webhook.site/notification"
+      responses:
+        "200":
+          description: Refund created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+  /refunds/{refund_id}:
+    get:
+      summary: Retrieve a Refund
+      description: Fetch details of a specific refund transaction.
+      operationId: getRefund
+      tags:
+        - Refunds
+      parameters:
+        - name: refund_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Refund retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+  /chargebacks/{chargeback_id}:
+    get:
+      summary: Retrieve a Chargeback
+      description: Get details of a specific chargeback.
+      operationId: getChargeback
+      tags:
+        - Chargebacks
+      parameters:
+        - name: chargeback_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Chargeback retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chargeback'
+  /chargebacks/dispute/{chargeback_id}:
+    post:
+      summary: Upload Dispute Documentation
+      description: Submit a PDF file (max 1MB, base64-encoded) to dispute a chargeback.
+      operationId: uploadChargebackDispute
+      tags:
+        - Chargebacks
+      parameters:
+        - name: chargeback_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - filename
+                - content
+              properties:
+                filename:
+                  type: string
+                  example: "chargeback_dispute.pdf"
+                content:
+                  type: string
+                  description: Base64-encoded PDF content (max 1MB)
+      responses:
+        "200":
+          description: Dispute uploaded successfully
+  /payment-methods:
+    get:
+      summary: Search Payment Methods
+      description: Retrieve available payment methods for a given country and currency.
+      operationId: searchPaymentMethods
+      tags:
+        - Payment Methods
+      parameters:
+        - name: country
+          in: query
+          required: true
+          description: ISO 3166-1 alpha-2 country code
+          schema:
+            type: string
+            example: "BR"
+        - name: currency
+          in: query
+          required: false
+          description: ISO 4217 currency code
+          schema:
+            type: string
+            example: "BRL"
+      responses:
+        "200":
+          description: Payment methods list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payment_methods:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PaymentMethod'
+  /tokens:
+    post:
+      summary: Create a Card Token
+      description: Tokenize card data for future payments without storing raw card details.
+      operationId: createToken
+      tags:
+        - Tokens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                holder_name:
+                  type: string
+                number:
+                  type: string
+                cvv:
+                  type: string
+                expiration_month:
+                  type: integer
+                expiration_year:
+                  type: integer
+      responses:
+        "200":
+          description: Token created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  holder_name:
+                    type: string
+                  expiration_month:
+                    type: integer
+                  expiration_year:
+                    type: integer
+                  last4:
+                    type: string
+                  brand:
+                    type: string
+  /fx-rates:
+    get:
+      summary: Get FX Rate
+      description: Retrieve foreign exchange rates for currency conversion.
+      operationId: getFxRate
+      tags:
+        - Currency
+      parameters:
+        - name: from
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "USD"
+        - name: to
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "BRL"
+        - name: country
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "BR"
+      responses:
+        "200":
+          description: FX rate retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  from:
+                    type: string
+                  to:
+                    type: string
+                  rate:
+                    type: number
+                    format: float
+                  valid_until:
+                    type: string
+                    format: date-time
+components:
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >
+        HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}"
+        Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+  schemas:
+    CreatePaymentRequest:
+      type: object
+      required:
+        - amount
+        - currency
+        - payment_method_flow
+        - country
+        - payer
+        - order_id
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Payment amount
+          example: 100.00
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: "USD"
+        currency_to_charge:
+          type: string
+          description: Currency to charge when different from payment currency
+        payment_method_id:
+          type: string
+          description: Payment method identifier (e.g. CARD, BANK_TRANSFER, CASH)
+          example: "CARD"
+        payment_method_flow:
+          type: string
+          enum:
+            - DIRECT
+            - REDIRECT
+          description: Payment flow type
+          example: "DIRECT"
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: "BR"
+        payer:
+          $ref: '#/components/schemas/Payer'
+        order_id:
+          type: string
+          description: Merchant's unique order identifier
+          example: "5346523564"
+        original_order_id:
+          type: string
+          description: Original order ID for installment or retry scenarios
+        description:
+          type: string
+          description: Payment description
+        notification_url:
+          type: string
+          format: uri
+          description: Webhook URL for payment status notifications
+        callback_url:
+          type: string
+          format: uri
+          description: URL to redirect user after payment completion
+        scheduled_date:
+          type: string
+          format: date
+          description: Schedule payment for a future date
+        card:
+          $ref: '#/components/schemas/CardInput'
+        wallet:
+          $ref: '#/components/schemas/WalletInput'
+        device:
+          $ref: '#/components/schemas/DeviceInfo'
+        additional_risk_data:
+          type: object
+          description: Additional fraud risk signals
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/Split'
+        remitter_user_id:
+          type: string
+        beneficiary_user_id:
+          type: string
+        subpurpose:
+          type: string
+        source_of_funds:
+          type: string
+        submerchant:
+          $ref: '#/components/schemas/Submerchant'
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: dLocal payment identifier
+          example: "PAY_GWLP5LSWQP9AXGBVPFZN"
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        payment_method_id:
+          type: string
+        payment_method_type:
+          type: string
+        payment_method_flow:
+          type: string
+        country:
+          type: string
+        payer:
+          $ref: '#/components/schemas/Payer'
+        order_id:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+            - PENDING
+            - PAID
+            - REJECTED
+            - CANCELLED
+            - EXPIRED
+            - AUTHORIZED
+          description: Current payment status
+        status_code:
+          type: string
+        status_detail:
+          type: string
+        created_date:
+          type: string
+          format: date-time
+        approved_date:
+          type: string
+          format: date-time
+        redirect_url:
+          type: string
+          format: uri
+          description: URL to redirect user for REDIRECT flow payments
+        card:
+          $ref: '#/components/schemas/CardOutput'
+        three_dsecure:
+          type: object
+          properties:
+            eci:
+              type: string
+            cavv:
+              type: string
+            xid:
+              type: string
+            version:
+              type: string
+    CreateRefundRequest:
+      type: object
+      required:
+        - payment_id
+        - amount
+        - currency
+      properties:
+        payment_id:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        notification_url:
+          type: string
+          format: uri
+        order_refund_id:
+          type: string
+        beneficiary_name:
+          type: string
+        bank:
+          type: string
+        bank_account:
+          type: string
+        bank_account_type:
+          type: string
+        bank_branch:
+          type: string
+    Refund:
+      type: object
+      properties:
+        id:
+          type: string
+        payment_id:
+          type: string
+        order_refund_id:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        status:
+          type: string
+          enum:
+            - PENDING
+            - SUCCESS
+            - FAILED
+            - CANCELLED
+        status_code:
+          type: string
+        status_detail:
+          type: string
+        created_date:
+          type: string
+          format: date-time
+        amount_refunded:
+          type: number
+          format: float
+        transaction_id:
+          type: string
+        authorization_code:
+          type: string
+    Chargeback:
+      type: object
+      properties:
+        id:
+          type: string
+        payment_id:
+          type: string
+        created_date:
+          type: string
+          format: date-time
+        currency:
+          type: string
+        amount:
+          type: number
+          format: float
+        status:
+          type: string
+        reason_code:
+          type: string
+        reason_description:
+          type: string
+        chargeback_stage:
+          type: string
+        arn:
+          type: string
+          description: Acquirer Reference Number
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Payment method identifier
+        type:
+          type: string
+          enum:
+            - CARD
+            - BANK_TRANSFER
+            - CASH
+            - WALLET
+            - MOBILE_MONEY
+        name:
+          type: string
+        logo:
+          type: string
+          format: uri
+        allowed_flows:
+          type: array
+          items:
+            type: string
+            enum:
+              - DIRECT
+              - REDIRECT
+    Payer:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          example: "john@example.com"
+        document:
+          type: string
+          description: National ID or tax identifier
+          example: "12345678901"
+        document_type:
+          type: string
+        user_reference:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+        ip:
+          type: string
+          format: ipv4
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        number:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+        country:
+          type: string
+    CardInput:
+      type: object
+      properties:
+        holder_name:
+          type: string
+        number:
+          type: string
+          description: Card number (PAN) — only for secure_payments endpoint
+        cvv:
+          type: string
+        expiration_month:
+          type: integer
+        expiration_year:
+          type: integer
+        card_id:
+          type: string
+          description: Token from a previous tokenization
+        token:
+          type: string
+        installments:
+          type: integer
+        installments_id:
+          type: string
+        descriptor:
+          type: string
+        capture:
+          type: boolean
+        encrypted_data:
+          type: string
+          description: JWE-encrypted card data
+    CardOutput:
+      type: object
+      properties:
+        holder_name:
+          type: string
+        last4:
+          type: string
+        brand:
+          type: string
+        expiration_month:
+          type: integer
+        expiration_year:
+          type: integer
+        card_id:
+          type: string
+    WalletInput:
+      type: object
+      properties:
+        token:
+          type: string
+    DeviceInfo:
+      type: object
+      properties:
+        device_id:
+          type: string
+        ip:
+          type: string
+    Split:
+      type: object
+      properties:
+        user_id:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+    Submerchant:
+      type: object
+      properties:
+        merchant_id:
+          type: string
+        mcc:
+          type: string
+        name:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        param:
+          type: string
+tags:
+  - name: Payments
+    description: Create and manage payment transactions
+  - name: Refunds
+    description: Reverse payment transactions
+  - name: Chargebacks
+    description: Manage chargeback disputes
+  - name: Payment Methods
+    description: Query available local payment methods
+  - name: Tokens
+    description: Card tokenization operations
+  - name: Currency
+    description: Foreign exchange rate queries

@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/dlocal/main/json-schema/payment.json",
+  "title": "dLocal Payment",
+  "description": "A payment transaction processed through dLocal's emerging markets payment platform.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "dLocal payment identifier",
+      "example": "PAY_GWLP5LSWQP9AXGBVPFZN"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Payment amount",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "payment_method_id": {
+      "type": "string",
+      "description": "Payment method identifier"
+    },
+    "payment_method_flow": {
+      "type": "string",
+      "enum": ["DIRECT", "REDIRECT"],
+      "description": "Payment flow type"
+    },
+    "country": {
+      "type": "string",
+      "description": "ISO 3166-1 alpha-2 country code",
+      "pattern": "^[A-Z]{2}$"
+    },
+    "order_id": {
+      "type": "string",
+      "description": "Merchant's unique order identifier"
+    },
+    "description": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["PENDING", "PAID", "REJECTED", "CANCELLED", "EXPIRED", "AUTHORIZED"],
+      "description": "Current payment status"
+    },
+    "status_code": {
+      "type": "string"
+    },
+    "status_detail": {
+      "type": "string"
+    },
+    "created_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "approved_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "redirect_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "payer": {
+      "$ref": "#/definitions/Payer"
+    },
+    "card": {
+      "$ref": "#/definitions/CardOutput"
+    }
+  },
+  "required": ["id", "amount", "currency", "country", "status", "created_date"],
+  "definitions": {
+    "Payer": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "document": { "type": "string" },
+        "document_type": { "type": "string" }
+      },
+      "required": ["name", "email"]
+    },
+    "CardOutput": {
+      "type": "object",
+      "properties": {
+        "holder_name": { "type": "string" },
+        "last4": { "type": "string", "pattern": "^[0-9]{4}$" },
+        "brand": { "type": "string" },
+        "expiration_month": { "type": "integer", "minimum": 1, "maximum": 12 },
+        "expiration_year": { "type": "integer" },
+        "card_id": { "type": "string" }
+      }
+    }
+  }
+}

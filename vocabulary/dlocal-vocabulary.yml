@@ -1,0 +1,154 @@
+vocabulary:
+  name: dLocal API Vocabulary
+  description: Domain-specific terms and concepts used across the dLocal emerging markets payment platform.
+  version: "1.0"
+  created: 2026-06-13
+  terms:
+    - term: payin
+      definition: >
+        A payment received from a customer. dLocal payins support 1,000+ local payment
+        methods across 60+ emerging market countries including cards, cash, bank transfers,
+        mobile money, and eWallets.
+      aliases:
+        - payment
+        - charge
+      related:
+        - payout
+        - payment_method
+
+    - term: payout
+      definition: >
+        A disbursement of funds to a beneficiary. dLocal payouts enable global merchants
+        to send money to recipients in emerging markets using local payment rails and currencies.
+      aliases:
+        - disbursement
+        - transfer
+      related:
+        - payin
+        - beneficiary
+        - balance
+
+    - term: payment_method_flow
+      definition: >
+        Determines how the payment is processed. DIRECT means the transaction is completed
+        without redirecting the user (requires merchant to collect payment details).
+        REDIRECT means the user is sent to a payment page hosted by dLocal or the local provider.
+      values:
+        - DIRECT
+        - REDIRECT
+
+    - term: payment_method_id
+      definition: >
+        A code identifying the local payment method. Examples: CARD (credit/debit cards),
+        BT (bank transfer), CASH (cash voucher), PIX (Brazilian instant payment), MM (mobile money).
+      examples:
+        - CARD
+        - BT
+        - CASH
+        - PIX
+        - MM
+
+    - term: payer
+      definition: >
+        The customer initiating a payment. Includes personal identification (name, email,
+        national document), address, and device information required for local compliance.
+
+    - term: beneficiary
+      definition: >
+        The recipient of a payout. Includes identity information (name, national document),
+        bank account details, and optionally mobile wallet information.
+
+    - term: order_id
+      definition: >
+        A merchant-assigned unique identifier for a payment transaction. Used to prevent
+        duplicate processing and to retrieve payment status.
+
+    - term: request_id
+      definition: >
+        A merchant-assigned unique identifier for a payout request. Analogous to order_id
+        for payouts; used for idempotency and retrieval.
+
+    - term: card_id
+      definition: >
+        A token representing a customer's credit or debit card, created through the
+        tokenization endpoint. Used in place of raw card data for PCI-compliant payments.
+      aliases:
+        - token
+        - card_token
+
+    - term: hmac_signature
+      definition: >
+        dLocal uses HMAC-SHA256 signatures for API authentication. The signature is
+        computed by hashing the concatenation of X-Login, X-Date, and the request body
+        with the merchant's secret key, then included in the Authorization header.
+
+    - term: x_idempotency_key
+      definition: >
+        An optional header that prevents duplicate payment processing. Has a 7-day TTL
+        and a maximum length of 42 characters.
+
+    - term: notification_url
+      definition: >
+        A webhook endpoint provided by the merchant that receives asynchronous payment
+        status notifications from dLocal when a transaction's status changes.
+
+    - term: chargeback
+      definition: >
+        A reversal of a payment initiated by the card issuer or customer's bank, typically
+        due to a dispute. dLocal provides endpoints to retrieve chargeback details and
+        upload dispute documentation.
+
+    - term: installments
+      definition: >
+        A payment plan that splits the total amount into multiple periodic charges.
+        Supported for card payments in many Latin American markets.
+
+    - term: merchant_initiated_transaction
+      definition: >
+        A payment triggered by the merchant without direct customer interaction, using
+        a previously stored card token or card_id. Common for subscriptions and recurring billing.
+
+    - term: three_d_secure
+      definition: >
+        An additional layer of authentication for card payments that verifies the cardholder
+        with their issuing bank. dLocal supports 3DS across markets where issuers require it.
+      aliases:
+        - 3DS
+        - 3D Secure
+
+    - term: fx_quote
+      definition: >
+        A locked foreign exchange rate for a specific currency conversion, valid for a
+        short time window. Used in payouts to guarantee the exchange rate at time of submission.
+
+    - term: kyc
+      definition: >
+        Know Your Customer — the process of verifying the identity of platform sub-accounts
+        or payout beneficiaries for compliance with local financial regulations.
+      full_name: Know Your Customer
+
+    - term: split_payment
+      definition: >
+        A payment that distributes the received amount between the platform and one or
+        more sub-accounts (sellers) on the same transaction.
+
+    - term: sandbox
+      definition: >
+        dLocal's testing environment accessible at sandbox.dlocal.com. Provides sandbox
+        tools including endpoints to simulate chargebacks and test payment flows without
+        real money movement.
+
+    - term: emerging_markets
+      definition: >
+        The geographic focus of dLocal's platform, covering 60+ countries in Latin America,
+        Africa, and Asia where access to global payment infrastructure is limited.
+      regions:
+        - Latin America
+        - Africa
+        - Asia
+
+    - term: pci_dss
+      definition: >
+        Payment Card Industry Data Security Standard. Required for merchants using the
+        Full API integration (secure_payments endpoint) that transmits raw card data.
+      full_name: Payment Card Industry Data Security Standard

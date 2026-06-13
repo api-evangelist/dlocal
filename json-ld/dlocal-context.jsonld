@@ -1,0 +1,237 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "dlocal": "https://docs.dlocal.com/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Payment": {
+      "@id": "dlocal:Payment",
+      "@type": "@id"
+    },
+    "Payout": {
+      "@id": "dlocal:Payout",
+      "@type": "@id"
+    },
+    "Payer": {
+      "@id": "dlocal:Payer",
+      "@type": "@id"
+    },
+    "Beneficiary": {
+      "@id": "dlocal:Beneficiary",
+      "@type": "@id"
+    },
+    "CardOutput": {
+      "@id": "dlocal:CardOutput",
+      "@type": "@id"
+    },
+    "BankAccount": {
+      "@id": "dlocal:BankAccount",
+      "@type": "@id"
+    },
+    "Refund": {
+      "@id": "dlocal:Refund",
+      "@type": "@id"
+    },
+    "Chargeback": {
+      "@id": "dlocal:Chargeback",
+      "@type": "@id"
+    },
+    "Verification": {
+      "@id": "dlocal:Verification",
+      "@type": "@id"
+    },
+    "Account": {
+      "@id": "dlocal:Account",
+      "@type": "@id"
+    },
+    "Transfer": {
+      "@id": "dlocal:Transfer",
+      "@type": "@id"
+    },
+    "FxQuote": {
+      "@id": "dlocal:FxQuote",
+      "@type": "@id"
+    },
+    "PaymentMethod": {
+      "@id": "dlocal:PaymentMethod",
+      "@type": "@id"
+    },
+
+    "id": "@id",
+    "type": "@type",
+
+    "amount": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "currency": {
+      "@id": "schema:priceCurrency",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "schema:addressCountry",
+      "@type": "xsd:string"
+    },
+    "order_id": {
+      "@id": "schema:orderNumber",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "dlocal:status",
+      "@type": "xsd:string"
+    },
+    "status_code": {
+      "@id": "dlocal:statusCode",
+      "@type": "xsd:string"
+    },
+    "status_detail": {
+      "@id": "dlocal:statusDetail",
+      "@type": "xsd:string"
+    },
+    "created_date": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "approved_date": {
+      "@id": "dlocal:approvedDate",
+      "@type": "xsd:dateTime"
+    },
+    "updated_date": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "notification_url": {
+      "@id": "dlocal:notificationUrl",
+      "@type": "@id"
+    },
+    "callback_url": {
+      "@id": "dlocal:callbackUrl",
+      "@type": "@id"
+    },
+    "redirect_url": {
+      "@id": "dlocal:redirectUrl",
+      "@type": "@id"
+    },
+    "payment_method_id": {
+      "@id": "dlocal:paymentMethodId",
+      "@type": "xsd:string"
+    },
+    "payment_method_flow": {
+      "@id": "dlocal:paymentMethodFlow",
+      "@type": "xsd:string"
+    },
+    "payer": {
+      "@id": "dlocal:payer",
+      "@type": "@id"
+    },
+    "beneficiary": {
+      "@id": "dlocal:beneficiary",
+      "@type": "@id"
+    },
+    "card": {
+      "@id": "dlocal:card",
+      "@type": "@id"
+    },
+    "request_id": {
+      "@id": "dlocal:requestId",
+      "@type": "xsd:string"
+    },
+    "payment_id": {
+      "@id": "dlocal:paymentId",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "document": {
+      "@id": "dlocal:document",
+      "@type": "xsd:string"
+    },
+    "document_type": {
+      "@id": "dlocal:documentType",
+      "@type": "xsd:string"
+    },
+    "address": {
+      "@id": "schema:address",
+      "@type": "@id"
+    },
+    "phone": {
+      "@id": "schema:telephone",
+      "@type": "xsd:string"
+    },
+    "holder_name": {
+      "@id": "dlocal:cardHolderName",
+      "@type": "xsd:string"
+    },
+    "last4": {
+      "@id": "dlocal:cardLast4",
+      "@type": "xsd:string"
+    },
+    "brand": {
+      "@id": "dlocal:cardBrand",
+      "@type": "xsd:string"
+    },
+    "expiration_month": {
+      "@id": "dlocal:expirationMonth",
+      "@type": "xsd:integer"
+    },
+    "expiration_year": {
+      "@id": "dlocal:expirationYear",
+      "@type": "xsd:integer"
+    },
+    "card_id": {
+      "@id": "dlocal:cardId",
+      "@type": "xsd:string"
+    },
+    "installments": {
+      "@id": "dlocal:installments",
+      "@type": "xsd:integer"
+    },
+    "bank_account": {
+      "@id": "dlocal:bankAccount",
+      "@type": "@id"
+    },
+    "bank_code": {
+      "@id": "dlocal:bankCode",
+      "@type": "xsd:string"
+    },
+    "agency": {
+      "@id": "dlocal:bankAgency",
+      "@type": "xsd:string"
+    },
+    "rate": {
+      "@id": "dlocal:fxRate",
+      "@type": "xsd:decimal"
+    },
+    "valid_until": {
+      "@id": "dlocal:validUntil",
+      "@type": "xsd:dateTime"
+    },
+    "reason_code": {
+      "@id": "dlocal:reasonCode",
+      "@type": "xsd:string"
+    },
+    "reason_description": {
+      "@id": "dlocal:reasonDescription",
+      "@type": "xsd:string"
+    },
+    "chargeback_stage": {
+      "@id": "dlocal:chargebackStage",
+      "@type": "xsd:string"
+    },
+    "arn": {
+      "@id": "dlocal:acquirerReferenceNumber",
+      "@type": "xsd:string"
+    }
+  }
+}

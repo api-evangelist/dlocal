@@ -1,0 +1,63 @@
+{
+  "summary": "Submit a bank transfer payout in Brazil",
+  "description": "Example request to disburse funds to a Brazilian bank account.",
+  "request": {
+    "method": "POST",
+    "url": "https://api.dlocal.com/payouts",
+    "headers": {
+      "X-Date": "2026-06-13T00:00:00.000Z",
+      "X-Login": "your_x_login",
+      "X-Trans-Key": "your_x_trans_key",
+      "X-Version": "2.1",
+      "Content-Type": "application/json",
+      "Authorization": "V2-HMAC-SHA256, Signature: {computed_signature}"
+    },
+    "body": {
+      "request_id": "REQ-001",
+      "currency": "BRL",
+      "amount": 500.00,
+      "country": "BR",
+      "payment_method_id": "BT",
+      "beneficiary": {
+        "name": "João",
+        "lastname": "Santos",
+        "document": "98765432100",
+        "document_type": "CPF",
+        "email": "joao@example.com",
+        "bank_account": {
+          "type": "C",
+          "number": "12345-6",
+          "agency": "0001",
+          "bank_code": "341"
+        }
+      },
+      "notification_url": "https://webhook.site/payout-notify"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "PO-987654321",
+      "request_id": "REQ-001",
+      "amount": 500.00,
+      "currency": "BRL",
+      "country": "BR",
+      "payment_method_id": "BT",
+      "beneficiary": {
+        "name": "João",
+        "lastname": "Santos",
+        "document": "98765432100",
+        "bank_account": {
+          "type": "C",
+          "number": "12345-6",
+          "agency": "0001",
+          "bank_code": "341"
+        }
+      },
+      "status": "PROCESSING",
+      "status_code": "100",
+      "status_detail": "The payout is being processed.",
+      "created_date": "2026-06-13T10:30:00.000Z"
+    }
+  }
+}

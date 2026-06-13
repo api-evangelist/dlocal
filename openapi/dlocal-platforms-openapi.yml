@@ -1,0 +1,507 @@
+openapi: 3.0.3
+info:
+  title: dLocal Platforms API
+  description: >
+    Complete solution for marketplaces and platforms with automated account onboarding,
+    KYC information handling, bank account management, transfer operations, and account
+    status and balance queries.
+  version: "1.0"
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+servers:
+  - url: https://api.dlocal.com
+    description: Production
+  - url: https://sandbox.dlocal.com
+    description: Sandbox
+security:
+  - HmacAuth: []
+paths:
+  /accounts:
+    post:
+      summary: Create a Platform Account
+      description: Onboard a new sub-account (marketplace seller or platform participant).
+      operationId: createAccount
+      tags:
+        - Accounts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountRequest'
+            example:
+              merchant_id: "M-001"
+              name: "Seller Store A"
+              email: "seller@example.com"
+              document: "12345678000195"
+              document_type: "CNPJ"
+              country: "BR"
+      responses:
+        "200":
+          description: Account created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /accounts/{account_id}:
+    get:
+      summary: Get Account Status
+      description: Retrieve status and details of a platform sub-account.
+      operationId: getAccount
+      tags:
+        - Accounts
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Account retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+  /accounts/{account_id}/kyc:
+    post:
+      summary: Submit KYC Information
+      description: Submit Know Your Customer (KYC) documentation for a sub-account.
+      operationId: submitKyc
+      tags:
+        - KYC
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KycRequest'
+      responses:
+        "200":
+          description: KYC submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KycStatus'
+    get:
+      summary: Get KYC Status
+      description: Retrieve the current KYC verification status for a sub-account.
+      operationId: getKycStatus
+      tags:
+        - KYC
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: KYC status retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KycStatus'
+  /accounts/{account_id}/bank-accounts:
+    post:
+      summary: Add Bank Account
+      description: Register a bank account for a platform sub-account to receive settlements.
+      operationId: addBankAccount
+      tags:
+        - Bank Accounts
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BankAccountRequest'
+      responses:
+        "200":
+          description: Bank account added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccountRecord'
+    get:
+      summary: List Bank Accounts
+      description: List all registered bank accounts for a platform sub-account.
+      operationId: listBankAccounts
+      tags:
+        - Bank Accounts
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Bank accounts list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bank_accounts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BankAccountRecord'
+  /accounts/{account_id}/bank-accounts/{bank_account_id}:
+    delete:
+      summary: Remove Bank Account
+      description: Remove a registered bank account from a platform sub-account.
+      operationId: deleteBankAccount
+      tags:
+        - Bank Accounts
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: bank_account_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Bank account removed
+  /accounts/{account_id}/balances:
+    get:
+      summary: Get Account Balance
+      description: Retrieve the balance for a specific platform sub-account.
+      operationId: getAccountBalance
+      tags:
+        - Accounts
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Balance retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balances:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Balance'
+  /transfers:
+    post:
+      summary: Create a Transfer
+      description: Transfer funds between the platform account and a sub-account.
+      operationId: createTransfer
+      tags:
+        - Transfers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransferRequest'
+      responses:
+        "200":
+          description: Transfer created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+  /transfers/{transfer_id}:
+    get:
+      summary: Get Transfer Status
+      description: Retrieve the status and details of a transfer.
+      operationId: getTransfer
+      tags:
+        - Transfers
+      parameters:
+        - name: transfer_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Transfer retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+components:
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >
+        HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}"
+  schemas:
+    CreateAccountRequest:
+      type: object
+      required:
+        - name
+        - email
+        - document
+        - country
+      properties:
+        merchant_id:
+          type: string
+          description: Merchant-assigned identifier for the sub-account
+        name:
+          type: string
+          description: Business or individual name
+        email:
+          type: string
+          format: email
+        document:
+          type: string
+          description: Tax or national ID number
+        document_type:
+          type: string
+          description: Document type (e.g. CPF, CNPJ, DNI)
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+          description: dLocal account identifier
+        merchant_id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        document:
+          type: string
+        country:
+          type: string
+        status:
+          type: string
+          enum:
+            - PENDING
+            - ACTIVE
+            - SUSPENDED
+            - CLOSED
+        kyc_status:
+          type: string
+          enum:
+            - NOT_SUBMITTED
+            - PENDING
+            - APPROVED
+            - REJECTED
+        created_date:
+          type: string
+          format: date-time
+    KycRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - INDIVIDUAL
+            - BUSINESS
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/KycDocument'
+    KycDocument:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Document type (ID, PASSPORT, UTILITY_BILL, etc.)
+        filename:
+          type: string
+        content:
+          type: string
+          description: Base64-encoded document content
+        side:
+          type: string
+          enum:
+            - FRONT
+            - BACK
+    KycStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - NOT_SUBMITTED
+            - PENDING
+            - APPROVED
+            - REJECTED
+        rejection_reason:
+          type: string
+        updated_date:
+          type: string
+          format: date-time
+    BankAccountRequest:
+      type: object
+      required:
+        - type
+        - number
+        - bank_code
+      properties:
+        type:
+          type: string
+          enum:
+            - CHECKING
+            - SAVINGS
+        number:
+          type: string
+        agency:
+          type: string
+        bank_code:
+          type: string
+        holder_name:
+          type: string
+        document:
+          type: string
+    BankAccountRecord:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        number:
+          type: string
+        agency:
+          type: string
+        bank_code:
+          type: string
+        bank_name:
+          type: string
+        holder_name:
+          type: string
+        status:
+          type: string
+          enum:
+            - PENDING
+            - VERIFIED
+            - REJECTED
+        created_date:
+          type: string
+          format: date-time
+    Balance:
+      type: object
+      properties:
+        currency:
+          type: string
+        amount:
+          type: number
+          format: float
+        available_amount:
+          type: number
+          format: float
+        pending_amount:
+          type: number
+          format: float
+    CreateTransferRequest:
+      type: object
+      required:
+        - account_id
+        - amount
+        - currency
+      properties:
+        account_id:
+          type: string
+          description: Destination account ID
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        description:
+          type: string
+        reference_id:
+          type: string
+    Transfer:
+      type: object
+      properties:
+        id:
+          type: string
+        account_id:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        status:
+          type: string
+          enum:
+            - PENDING
+            - COMPLETED
+            - FAILED
+        description:
+          type: string
+        reference_id:
+          type: string
+        created_date:
+          type: string
+          format: date-time
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        number:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+        country:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        param:
+          type: string
+tags:
+  - name: Accounts
+    description: Platform sub-account management
+  - name: KYC
+    description: Know Your Customer verification
+  - name: Bank Accounts
+    description: Bank account registration and management
+  - name: Transfers
+    description: Fund transfers between accounts
