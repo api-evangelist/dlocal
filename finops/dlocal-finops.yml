@@ -1,0 +1,70 @@
+name: dLocal FinOps Framework
+description: FinOps considerations for organizations using dLocal's emerging markets payment platform. dLocal charges transaction-based fees negotiated per merchant, with costs varying by country, payment method, and volume. Multi-currency operations introduce FX conversion costs. Cost optimization requires volume commitments, payment method selection, and market-specific settlement strategies.
+version: "1.0"
+url: https://www.dlocal.com/our-solution/
+framework: FOCUS-1.0
+costCategories:
+  - name: Transaction Fees
+    description: Per-transaction fees charged on each payment processed through the dLocal platform. Rates are negotiated based on merchant volume, geography, and payment method mix.
+    type: variable
+    unit: per-transaction
+    drivers:
+      - Transaction volume
+      - Payment method (cards vs. cash vs. bank transfer vs. mobile money)
+      - Country/region
+      - Currency pair
+    optimization:
+      - Negotiate volume commitments for lower per-transaction rates
+      - Optimize payment method routing to lower-cost local methods
+      - Consolidate transactions to maximize volume discounts
+  - name: Setup Fees
+    description: One-time or periodic fees for account creation, onboarding, and integration setup on the dLocal platform.
+    type: fixed
+    unit: one-time
+    notes: Specific amounts are negotiated per merchant contract
+  - name: Monthly Account Management Fees
+    description: Recurring monthly fees for maintaining access to the dLocal platform, Merchant Dashboard, and support services.
+    type: fixed
+    unit: monthly
+    notes: Specific amounts are negotiated per merchant contract
+  - name: FX Conversion Costs
+    description: Foreign exchange conversion fees when settling across currencies. dLocal supports multi-currency payouts with FX conversion between local currencies and USD/EUR.
+    type: variable
+    unit: per-conversion
+    drivers:
+      - Currency pair spread
+      - Market volatility in emerging markets
+      - Settlement timing
+    optimization:
+      - Use quote generation API before committing to payouts
+      - Batch payouts to reduce FX conversion frequency
+      - Monitor FX rates across settlement windows
+  - name: Refund and Chargeback Costs
+    description: Fees associated with processing payment refunds and handling chargebacks through the dLocal Payins API.
+    type: variable
+    unit: per-incident
+    optimization:
+      - Implement strong fraud detection to minimize chargebacks
+      - Use 3D Secure authentication for card transactions
+      - Monitor refund rates by market and payment method
+  - name: Sandbox/Testing Environment
+    description: Access to dLocal's sandbox environment for testing API integrations. Sandbox API has full parity with production.
+    type: included
+    notes: Included with merchant account; no additional cost for sandbox usage
+visibility:
+  - Detailed invoices and transaction reports available in the dLocal Merchant Dashboard
+  - API access to transaction history and balance information via Payins and Payouts APIs
+  - Regional breakdown available for multi-country deployments
+  - No publicly documented cost export API or FinOps-specific endpoints
+optimization:
+  - Negotiate volume-based pricing tiers before contract signing
+  - Monitor settlement timing to reduce FX exposure in volatile markets
+  - Use idempotency keys to prevent duplicate transactions and associated fees
+  - Evaluate payment method mix per market to route to lowest-cost options
+  - Leverage installment payment features to increase approval rates without increasing cost
+governance:
+  - Assign dedicated FinOps ownership for each market/region dLocal is active in
+  - Set up alerts in the Merchant Dashboard for unusual transaction volumes
+  - Review monthly account statements against expected volumes
+  - Track FX costs separately for budget forecasting in emerging markets
+  - Establish chargeback rate KPIs per market with dLocal account management

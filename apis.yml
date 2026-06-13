@@ -1,0 +1,118 @@
+aid: dlocal
+name: dLocal
+description: dLocal is an emerging markets payment platform that enables global merchants to accept and disburse local payment methods and currencies through a single REST API. The platform covers 60+ countries across Africa, Asia, and Latin America, providing payins, payouts, and platform-as-a-service capabilities with 1,000+ local payment methods including cards, cash, bank transfers, mobile money, and eWallets.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/dlocal/refs/heads/main/apis.yml
+created: 2026-06-13
+modified: 2026-06-13
+specificationVersion: "0.19"
+tags:
+  - Payments
+  - Emerging Markets
+  - Payins
+  - Payouts
+  - Fintech
+  - Latin America
+  - Africa
+  - Asia
+  - Local Payment Methods
+  - Payment Processing
+apis:
+  - name: dLocal Payins API
+    description: Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.dlocal.com/reference/api
+    baseURL: https://api.dlocal.com
+    tags:
+      - Payments
+      - Payins
+      - Cards
+      - Bank Transfers
+      - Mobile Money
+    properties:
+      - type: Documentation
+        url: https://docs.dlocal.com/docs/full-api
+      - type: OpenAPI
+        url: https://docs.dlocal.com/llms.txt
+      - type: Authentication
+        url: https://docs.dlocal.com/reference/payins-security
+      - type: PostmanCollection
+        url: https://docs.dlocal.com/reference/postman-api-collection
+  - name: dLocal Payouts API
+    description: Distribute funds globally with multi-currency support and local compliance across 60+ emerging market countries. Includes payout submission and retrieval, balance checking, quote generation for currency exchange, payout cancellation and release, and account-specific operations.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.dlocal.com/reference/api
+    baseURL: https://api.dlocal.com
+    tags:
+      - Payouts
+      - Disbursements
+      - Currency Exchange
+      - Mass Payments
+    properties:
+      - type: Documentation
+        url: https://docs.dlocal.com/docs/full-api
+      - type: Authentication
+        url: https://docs.dlocal.com/reference/payins-security
+  - name: dLocal Platforms API
+    description: Complete solution for marketplaces and platforms with automated account onboarding, KYC information handling, bank account management, transfer operations, and account status and balance queries.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.dlocal.com/reference/api
+    baseURL: https://api.dlocal.com
+    tags:
+      - Platforms
+      - Marketplaces
+      - KYC
+      - Onboarding
+    properties:
+      - type: Documentation
+        url: https://docs.dlocal.com/docs/full-api
+      - type: Authentication
+        url: https://docs.dlocal.com/reference/payins-security
+  - name: dLocal Verification API
+    description: Identity verification and document management API supporting verification creation and retrieval, document management, and status updates for compliance workflows across emerging markets.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.dlocal.com/reference/api
+    baseURL: https://api.dlocal.com
+    tags:
+      - Verification
+      - KYC
+      - Identity
+      - Compliance
+    properties:
+      - type: Documentation
+        url: https://docs.dlocal.com/docs/full-api
+      - type: Authentication
+        url: https://docs.dlocal.com/reference/payins-security
+common:
+  - type: Website
+    url: https://www.dlocal.com/
+  - type: Documentation
+    url: https://docs.dlocal.com/
+  - type: GettingStarted
+    url: https://docs.dlocal.com/docs/get-started
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: GitHubOrg
+    url: https://github.com/dlocal
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/dlocal
+  - type: Blog
+    url: https://www.dlocal.com/blog/
+  - type: Pricing
+    url: https://www.dlocal.com/faqs/faqs-solutions/
+  - type: StatusPage
+    url: https://dlocal.statuspage.io/
+  - type: X
+    url: https://twitter.com/dLocalPayments
+  - type: PostmanWorkspace
+    url: https://www.postman.com/dlocal-dev
+  - type: Plans
+    url: plans/dlocal-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/dlocal-rate-limits.yml
+  - type: FinOps
+    url: finops/dlocal-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
