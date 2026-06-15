@@ -145,5 +145,17 @@
       "category": "Markets and Consumers",
       "read_time_minutes": 4
     }
-  ]
+  ],
+  "repo": "dlocal",
+  "feeds": [
+    {
+      "source": "https://www.linkedin.com/company/dlocal",
+      "feed_url": "https://www.linkedin.com/company/dlocal",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-14T20:42:17Z"
 }
