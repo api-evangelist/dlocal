@@ -2,7 +2,7 @@ aid: dlocal
 name: dLocal
 description: dLocal is an emerging markets payment platform that enables global merchants to accept and disburse local payment methods and currencies through a single REST API. The platform covers 60+ countries across Africa, Asia, and Latin America, providing payins, payouts, and platform-as-a-service capabilities with 1,000+ local payment methods including cards, cash, bank transfers, mobile money, and eWallets.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/dlocal/refs/heads/main/apis.yml
 created: 2026-06-13
 modified: 2026-06-13
@@ -21,7 +21,7 @@ tags:
 apis:
   - name: dLocal Payins API
     description: Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.dlocal.com/reference/api
     baseURL: https://api.dlocal.com
     tags:
@@ -41,7 +41,7 @@ apis:
         url: https://docs.dlocal.com/reference/postman-api-collection
   - name: dLocal Payouts API
     description: Distribute funds globally with multi-currency support and local compliance across 60+ emerging market countries. Includes payout submission and retrieval, balance checking, quote generation for currency exchange, payout cancellation and release, and account-specific operations.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.dlocal.com/reference/api
     baseURL: https://api.dlocal.com
     tags:
@@ -56,7 +56,7 @@ apis:
         url: https://docs.dlocal.com/reference/payins-security
   - name: dLocal Platforms API
     description: Complete solution for marketplaces and platforms with automated account onboarding, KYC information handling, bank account management, transfer operations, and account status and balance queries.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.dlocal.com/reference/api
     baseURL: https://api.dlocal.com
     tags:
@@ -71,7 +71,7 @@ apis:
         url: https://docs.dlocal.com/reference/payins-security
   - name: dLocal Verification API
     description: Identity verification and document management API supporting verification creation and retrieval, document management, and status updates for compliance workflows across emerging markets.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://docs.dlocal.com/reference/api
     baseURL: https://api.dlocal.com
     tags:
