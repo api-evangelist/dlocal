@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/dlocal-payins-openapi.yml, openapi/dlocal-payouts-openapi.yml, openapi/dlocal-platforms-openapi.yml,
+  openapi/dlocal-verification-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: HmacAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature
+    = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)'
+  sources:
+  - openapi/dlocal-payins-openapi.yml
+  - openapi/dlocal-payouts-openapi.yml
+  - openapi/dlocal-platforms-openapi.yml
+  - openapi/dlocal-verification-openapi.yml

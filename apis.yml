@@ -85,6 +85,10 @@ apis:
       - type: Authentication
         url: https://docs.dlocal.com/reference/payins-security
 common:
+  - type: DomainSecurity
+    url: security/dlocal-domain-security.yml
+  - type: Authentication
+    url: authentication/dlocal-authentication.yml
   - type: Website
     url: https://www.dlocal.com/
   - type: Documentation
