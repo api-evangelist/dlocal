@@ -2,13 +2,14 @@
   "repo": "dlocal",
   "feeds": [
     {
-      "source": "https://www.dlocal.com/blog/",
-      "feed_url": "",
+      "source": "https://www.linkedin.com/company/dlocal",
+      "feed_url": "https://www.linkedin.com/company/dlocal",
+      "title": "",
       "saved": 0,
-      "method": "agent-scrape"
+      "method": "none"
     }
   ],
-  "fetched": "2026-06-27T12:36:39Z",
-  "post_count": 0,
-  "agent_pulled": "2026-06-27"
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 1,
+  "agent_pulled": "2026-07-04"
 }
