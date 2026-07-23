@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: dLocal Payins Accounts Currency API
+  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
+
+    '
+  version: '2.1'
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+  termsOfService: https://www.dlocal.com/terms-of-service/
+servers:
+- url: https://api.dlocal.com
+  description: Production
+- url: https://sandbox.dlocal.com
+  description: Sandbox
+security:
+- HmacAuth: []
+tags:
+- name: Currency
+  description: Foreign exchange rate queries
+paths:
+  /fx-rates:
+    get:
+      summary: Get FX Rate
+      description: Retrieve foreign exchange rates for currency conversion.
+      operationId: getFxRate
+      tags:
+      - Currency
+      parameters:
+      - name: from
+        in: query
+        required: true
+        schema:
+          type: string
+          example: USD
+      - name: to
+        in: query
+        required: true
+        schema:
+          type: string
+          example: BRL
+      - name: country
+        in: query
+        required: true
+        schema:
+          type: string
+          example: BR
+      responses:
+        '200':
+          description: FX rate retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  from:
+                    type: string
+                  to:
+                    type: string
+                  rate:
+                    type: number
+                    format: float
+                  valid_until:
+                    type: string
+                    format: date-time
+  /fx-rates/quotes:
+    post:
+      summary: Generate FX Quote
+      description: 'Generate a currency exchange quote for a payout. The quote locks in a rate for a short period.
+
+        '
+      operationId: createFxQuote
+      tags:
+      - Currency
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - from_currency
+              - to_currency
+              - amount
+              - country
+              properties:
+                from_currency:
+                  type: string
+                  example: USD
+                to_currency:
+                  type: string
+                  example: BRL
+                amount:
+                  type: number
+                  format: float
+                  example: 1000.0
+                country:
+                  type: string
+                  example: BR
+      responses:
+        '200':
+          description: FX quote generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FxQuote'
+components:
+  schemas:
+    FxQuote:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Quote identifier to use in payout requests
+        from_currency:
+          type: string
+        to_currency:
+          type: string
+        rate:
+          type: number
+          format: float
+          description: Exchange rate applied
+        from_amount:
+          type: number
+          format: float
+        to_amount:
+          type: number
+          format: float
+        valid_until:
+          type: string
+          format: date-time
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+
+        '

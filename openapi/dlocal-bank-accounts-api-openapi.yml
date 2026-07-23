@@ -1,0 +1,151 @@
+openapi: 3.0.3
+info:
+  title: dLocal Payins Accounts Bank Accounts API
+  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
+
+    '
+  version: '2.1'
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+  termsOfService: https://www.dlocal.com/terms-of-service/
+servers:
+- url: https://api.dlocal.com
+  description: Production
+- url: https://sandbox.dlocal.com
+  description: Sandbox
+security:
+- HmacAuth: []
+tags:
+- name: Bank Accounts
+  description: Bank account registration and management
+paths:
+  /accounts/{account_id}/bank-accounts:
+    post:
+      summary: Add Bank Account
+      description: Register a bank account for a platform sub-account to receive settlements.
+      operationId: addBankAccount
+      tags:
+      - Bank Accounts
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BankAccountRequest'
+      responses:
+        '200':
+          description: Bank account added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccountRecord'
+    get:
+      summary: List Bank Accounts
+      description: List all registered bank accounts for a platform sub-account.
+      operationId: listBankAccounts
+      tags:
+      - Bank Accounts
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Bank accounts list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  bank_accounts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BankAccountRecord'
+  /accounts/{account_id}/bank-accounts/{bank_account_id}:
+    delete:
+      summary: Remove Bank Account
+      description: Remove a registered bank account from a platform sub-account.
+      operationId: deleteBankAccount
+      tags:
+      - Bank Accounts
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: bank_account_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Bank account removed
+components:
+  schemas:
+    BankAccountRecord:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        number:
+          type: string
+        agency:
+          type: string
+        bank_code:
+          type: string
+        bank_name:
+          type: string
+        holder_name:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - VERIFIED
+          - REJECTED
+        created_date:
+          type: string
+          format: date-time
+    BankAccountRequest:
+      type: object
+      required:
+      - type
+      - number
+      - bank_code
+      properties:
+        type:
+          type: string
+          enum:
+          - CHECKING
+          - SAVINGS
+        number:
+          type: string
+        agency:
+          type: string
+        bank_code:
+          type: string
+        holder_name:
+          type: string
+        document:
+          type: string
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+
+        '

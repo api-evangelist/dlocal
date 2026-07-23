@@ -1,0 +1,110 @@
+openapi: 3.0.3
+info:
+  title: dLocal Payins Accounts Chargebacks API
+  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
+
+    '
+  version: '2.1'
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+  termsOfService: https://www.dlocal.com/terms-of-service/
+servers:
+- url: https://api.dlocal.com
+  description: Production
+- url: https://sandbox.dlocal.com
+  description: Sandbox
+security:
+- HmacAuth: []
+tags:
+- name: Chargebacks
+  description: Manage chargeback disputes
+paths:
+  /chargebacks/{chargeback_id}:
+    get:
+      summary: Retrieve a Chargeback
+      description: Get details of a specific chargeback.
+      operationId: getChargeback
+      tags:
+      - Chargebacks
+      parameters:
+      - name: chargeback_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Chargeback retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chargeback'
+  /chargebacks/dispute/{chargeback_id}:
+    post:
+      summary: Upload Dispute Documentation
+      description: Submit a PDF file (max 1MB, base64-encoded) to dispute a chargeback.
+      operationId: uploadChargebackDispute
+      tags:
+      - Chargebacks
+      parameters:
+      - name: chargeback_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - filename
+              - content
+              properties:
+                filename:
+                  type: string
+                  example: chargeback_dispute.pdf
+                content:
+                  type: string
+                  description: Base64-encoded PDF content (max 1MB)
+      responses:
+        '200':
+          description: Dispute uploaded successfully
+components:
+  schemas:
+    Chargeback:
+      type: object
+      properties:
+        id:
+          type: string
+        payment_id:
+          type: string
+        created_date:
+          type: string
+          format: date-time
+        currency:
+          type: string
+        amount:
+          type: number
+          format: float
+        status:
+          type: string
+        reason_code:
+          type: string
+        reason_description:
+          type: string
+        chargeback_stage:
+          type: string
+        arn:
+          type: string
+          description: Acquirer Reference Number
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+
+        '

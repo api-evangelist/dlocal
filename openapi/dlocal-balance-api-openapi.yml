@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: dLocal Payins Accounts Balance API
+  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
+
+    '
+  version: '2.1'
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+  termsOfService: https://www.dlocal.com/terms-of-service/
+servers:
+- url: https://api.dlocal.com
+  description: Production
+- url: https://sandbox.dlocal.com
+  description: Sandbox
+security:
+- HmacAuth: []
+tags:
+- name: Balance
+  description: Query account balances
+paths:
+  /balances:
+    get:
+      summary: Get Account Balance
+      description: Retrieve the current balance for the merchant account across currencies.
+      operationId: getBalance
+      tags:
+      - Balance
+      parameters:
+      - name: currency
+        in: query
+        required: false
+        description: Filter by specific currency
+        schema:
+          type: string
+          example: USD
+      responses:
+        '200':
+          description: Balance retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balances:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Balance'
+components:
+  schemas:
+    Balance:
+      type: object
+      properties:
+        currency:
+          type: string
+        amount:
+          type: number
+          format: float
+        available_amount:
+          type: number
+          format: float
+        pending_amount:
+          type: number
+          format: float
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+
+        '

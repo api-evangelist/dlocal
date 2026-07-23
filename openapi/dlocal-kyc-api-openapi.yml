@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: dLocal Payins Accounts KYC API
+  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
+
+    '
+  version: '2.1'
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+  termsOfService: https://www.dlocal.com/terms-of-service/
+servers:
+- url: https://api.dlocal.com
+  description: Production
+- url: https://sandbox.dlocal.com
+  description: Sandbox
+security:
+- HmacAuth: []
+tags:
+- name: KYC
+  description: Know Your Customer verification
+paths:
+  /accounts/{account_id}/kyc:
+    post:
+      summary: Submit KYC Information
+      description: Submit Know Your Customer (KYC) documentation for a sub-account.
+      operationId: submitKyc
+      tags:
+      - KYC
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KycRequest'
+      responses:
+        '200':
+          description: KYC submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KycStatus'
+    get:
+      summary: Get KYC Status
+      description: Retrieve the current KYC verification status for a sub-account.
+      operationId: getKycStatus
+      tags:
+      - KYC
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: KYC status retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KycStatus'
+components:
+  schemas:
+    KycRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - INDIVIDUAL
+          - BUSINESS
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/KycDocument'
+    KycStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - NOT_SUBMITTED
+          - PENDING
+          - APPROVED
+          - REJECTED
+        rejection_reason:
+          type: string
+        updated_date:
+          type: string
+          format: date-time
+    KycDocument:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Document type (ID, PASSPORT, UTILITY_BILL, etc.)
+        filename:
+          type: string
+        content:
+          type: string
+          description: Base64-encoded document content
+        side:
+          type: string
+          enum:
+          - FRONT
+          - BACK
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+
+        '

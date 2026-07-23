@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: dLocal Payins Accounts Refunds API
+  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
+
+    '
+  version: '2.1'
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+  termsOfService: https://www.dlocal.com/terms-of-service/
+servers:
+- url: https://api.dlocal.com
+  description: Production
+- url: https://sandbox.dlocal.com
+  description: Sandbox
+security:
+- HmacAuth: []
+tags:
+- name: Refunds
+  description: Reverse payment transactions
+paths:
+  /refunds:
+    post:
+      summary: Create a Refund
+      description: 'Reverse a card payment or initiate a bank transfer for alternative payment methods.
+
+        '
+      operationId: createRefund
+      tags:
+      - Refunds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRefundRequest'
+            example:
+              payment_id: PAY_GWLP5LSWQP9AXGBVPFZN
+              amount: 50.0
+              currency: USD
+              notification_url: https://webhook.site/notification
+      responses:
+        '200':
+          description: Refund created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+  /refunds/{refund_id}:
+    get:
+      summary: Retrieve a Refund
+      description: Fetch details of a specific refund transaction.
+      operationId: getRefund
+      tags:
+      - Refunds
+      parameters:
+      - name: refund_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Refund retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+components:
+  schemas:
+    Refund:
+      type: object
+      properties:
+        id:
+          type: string
+        payment_id:
+          type: string
+        order_refund_id:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - SUCCESS
+          - FAILED
+          - CANCELLED
+        status_code:
+          type: string
+        status_detail:
+          type: string
+        created_date:
+          type: string
+          format: date-time
+        amount_refunded:
+          type: number
+          format: float
+        transaction_id:
+          type: string
+        authorization_code:
+          type: string
+    CreateRefundRequest:
+      type: object
+      required:
+      - payment_id
+      - amount
+      - currency
+      properties:
+        payment_id:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        notification_url:
+          type: string
+          format: uri
+        order_refund_id:
+          type: string
+        beneficiary_name:
+          type: string
+        bank:
+          type: string
+        bank_account:
+          type: string
+        bank_account_type:
+          type: string
+        bank_branch:
+          type: string
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+
+        '

@@ -1,0 +1,116 @@
+openapi: 3.0.3
+info:
+  title: dLocal Payins Accounts Transfers API
+  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
+
+    '
+  version: '2.1'
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+  termsOfService: https://www.dlocal.com/terms-of-service/
+servers:
+- url: https://api.dlocal.com
+  description: Production
+- url: https://sandbox.dlocal.com
+  description: Sandbox
+security:
+- HmacAuth: []
+tags:
+- name: Transfers
+  description: Fund transfers between accounts
+paths:
+  /transfers:
+    post:
+      summary: Create a Transfer
+      description: Transfer funds between the platform account and a sub-account.
+      operationId: createTransfer
+      tags:
+      - Transfers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransferRequest'
+      responses:
+        '200':
+          description: Transfer created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+  /transfers/{transfer_id}:
+    get:
+      summary: Get Transfer Status
+      description: Retrieve the status and details of a transfer.
+      operationId: getTransfer
+      tags:
+      - Transfers
+      parameters:
+      - name: transfer_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Transfer retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+components:
+  schemas:
+    Transfer:
+      type: object
+      properties:
+        id:
+          type: string
+        account_id:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - COMPLETED
+          - FAILED
+        description:
+          type: string
+        reference_id:
+          type: string
+        created_date:
+          type: string
+          format: date-time
+    CreateTransferRequest:
+      type: object
+      required:
+      - account_id
+      - amount
+      - currency
+      properties:
+        account_id:
+          type: string
+          description: Destination account ID
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        description:
+          type: string
+        reference_id:
+          type: string
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+
+        '

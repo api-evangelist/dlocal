@@ -1,0 +1,139 @@
+openapi: 3.0.3
+info:
+  title: dLocal Payins Accounts Documents API
+  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
+
+    '
+  version: '2.1'
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+  termsOfService: https://www.dlocal.com/terms-of-service/
+servers:
+- url: https://api.dlocal.com
+  description: Production
+- url: https://sandbox.dlocal.com
+  description: Sandbox
+security:
+- HmacAuth: []
+tags:
+- name: Documents
+  description: Document upload and management
+paths:
+  /verifications/{verification_id}/documents:
+    post:
+      summary: Upload Verification Document
+      description: Upload a document for an active verification request.
+      operationId: uploadVerificationDocument
+      tags:
+      - Documents
+      parameters:
+      - name: verification_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocumentUploadRequest'
+            example:
+              type: ID
+              side: FRONT
+              filename: id_front.jpg
+              content: base64_encoded_image_content
+      responses:
+        '200':
+          description: Document uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentRecord'
+    get:
+      summary: List Verification Documents
+      description: List all documents submitted for a verification request.
+      operationId: listVerificationDocuments
+      tags:
+      - Documents
+      parameters:
+      - name: verification_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Documents list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  documents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DocumentRecord'
+components:
+  schemas:
+    DocumentUploadRequest:
+      type: object
+      required:
+      - type
+      - filename
+      - content
+      properties:
+        type:
+          type: string
+          description: Document type
+          enum:
+          - ID
+          - PASSPORT
+          - DRIVER_LICENSE
+          - UTILITY_BILL
+          - BANK_STATEMENT
+          - TAX_RETURN
+        side:
+          type: string
+          enum:
+          - FRONT
+          - BACK
+          description: Document side (for ID cards)
+        filename:
+          type: string
+          description: Original filename with extension
+          example: id_front.jpg
+        content:
+          type: string
+          description: Base64-encoded document content
+    DocumentRecord:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        side:
+          type: string
+        filename:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - ACCEPTED
+          - REJECTED
+        rejection_reason:
+          type: string
+        uploaded_date:
+          type: string
+          format: date-time
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+
+        '

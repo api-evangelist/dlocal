@@ -1,0 +1,75 @@
+openapi: 3.0.3
+info:
+  title: dLocal Payins Accounts Tokens API
+  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
+
+    '
+  version: '2.1'
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+  termsOfService: https://www.dlocal.com/terms-of-service/
+servers:
+- url: https://api.dlocal.com
+  description: Production
+- url: https://sandbox.dlocal.com
+  description: Sandbox
+security:
+- HmacAuth: []
+tags:
+- name: Tokens
+  description: Card tokenization operations
+paths:
+  /tokens:
+    post:
+      summary: Create a Card Token
+      description: Tokenize card data for future payments without storing raw card details.
+      operationId: createToken
+      tags:
+      - Tokens
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                holder_name:
+                  type: string
+                number:
+                  type: string
+                cvv:
+                  type: string
+                expiration_month:
+                  type: integer
+                expiration_year:
+                  type: integer
+      responses:
+        '200':
+          description: Token created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  holder_name:
+                    type: string
+                  expiration_month:
+                    type: integer
+                  expiration_year:
+                    type: integer
+                  last4:
+                    type: string
+                  brand:
+                    type: string
+components:
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+
+        '

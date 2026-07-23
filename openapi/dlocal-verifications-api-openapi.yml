@@ -1,0 +1,278 @@
+openapi: 3.0.3
+info:
+  title: dLocal Payins Accounts Verifications API
+  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
+
+    '
+  version: '2.1'
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+  termsOfService: https://www.dlocal.com/terms-of-service/
+servers:
+- url: https://api.dlocal.com
+  description: Production
+- url: https://sandbox.dlocal.com
+  description: Sandbox
+security:
+- HmacAuth: []
+tags:
+- name: Verifications
+  description: Identity verification requests
+paths:
+  /verifications:
+    post:
+      summary: Create a Verification
+      description: 'Initiate an identity verification request. Supports PAYOUT_HOLD and REMITTANCE verification types.
+
+        '
+      operationId: createVerification
+      tags:
+      - Verifications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVerificationRequest'
+            example:
+              type: PAYOUT_HOLD
+              order_id: VER-001
+              payer:
+                name: John Doe
+                email: john@example.com
+                document: '12345678901'
+                document_type: CPF
+                country: BR
+              notification_url: https://webhook.site/verification
+      responses:
+        '200':
+          description: Verification created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verification'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /verifications/{verification_id}:
+    get:
+      summary: Retrieve a Verification
+      description: Get status and details of a specific verification request.
+      operationId: getVerification
+      tags:
+      - Verifications
+      parameters:
+      - name: verification_id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: VER-ABCD1234
+      responses:
+        '200':
+          description: Verification retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verification'
+        '404':
+          description: Verification not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /verifications/{verification_id}/status:
+    put:
+      summary: Update Verification Status
+      description: Update the status of a verification (e.g., approve or reject during compliance workflows).
+      operationId: updateVerificationStatus
+      tags:
+      - Verifications
+      parameters:
+      - name: verification_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - status
+              properties:
+                status:
+                  type: string
+                  enum:
+                  - APPROVED
+                  - REJECTED
+                reason:
+                  type: string
+                  description: Rejection reason (required when status is REJECTED)
+      responses:
+        '200':
+          description: Status updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verification'
+components:
+  schemas:
+    DocumentRecord:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        side:
+          type: string
+        filename:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - ACCEPTED
+          - REJECTED
+        rejection_reason:
+          type: string
+        uploaded_date:
+          type: string
+          format: date-time
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        number:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+        country:
+          type: string
+    Verification:
+      type: object
+      properties:
+        id:
+          type: string
+          description: dLocal verification identifier
+          example: VER-ABCD1234
+        type:
+          type: string
+          enum:
+          - PAYOUT_HOLD
+          - REMITTANCE
+        order_id:
+          type: string
+        payer:
+          $ref: '#/components/schemas/Payer'
+        status:
+          type: string
+          enum:
+          - PENDING
+          - IN_PROGRESS
+          - APPROVED
+          - REJECTED
+          - EXPIRED
+          description: Current verification status
+        status_detail:
+          type: string
+        redirect_url:
+          type: string
+          format: uri
+          description: URL to redirect user to complete verification
+        created_date:
+          type: string
+          format: date-time
+        updated_date:
+          type: string
+          format: date-time
+        expiration_date:
+          type: string
+          format: date-time
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/DocumentRecord'
+    CreateVerificationRequest:
+      type: object
+      required:
+      - type
+      - order_id
+      - payer
+      properties:
+        type:
+          type: string
+          enum:
+          - PAYOUT_HOLD
+          - REMITTANCE
+          description: Type of verification workflow
+        order_id:
+          type: string
+          description: Merchant-assigned unique identifier
+        payer:
+          $ref: '#/components/schemas/Payer'
+        notification_url:
+          type: string
+          format: uri
+          description: Webhook URL for verification status notifications
+        callback_url:
+          type: string
+          format: uri
+          description: URL to redirect user after verification completion
+        metadata:
+          type: object
+          description: Additional metadata for the verification
+    Payer:
+      type: object
+      required:
+      - name
+      - email
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+        document:
+          type: string
+          description: National ID or tax identifier
+        document_type:
+          type: string
+          description: Document type code (CPF, CNPJ, DNI, etc.)
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        param:
+          type: string
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+
+        '
