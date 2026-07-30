@@ -2,7 +2,20 @@ aid: dlocal
 name: dLocal
 description: dLocal is an emerging markets payment platform that enables global merchants to accept and disburse local payment methods and currencies through a single REST API. The platform covers 60+ countries across Africa, Asia, and Latin America, providing payins, payouts, and platform-as-a-service capabilities with 1,000+ local payment methods including cards, cash, bank transfers, mobile money, and eWallets.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/dlocal.png
 url: https://raw.githubusercontent.com/api-evangelist/dlocal/refs/heads/main/apis.yml
 created: 2026-06-13
 modified: 2026-06-13
@@ -19,71 +32,282 @@ tags:
   - Local Payment Methods
   - Payment Processing
 apis:
-  - name: dLocal Payins API
-    description: Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.dlocal.com/reference/api
-    baseURL: https://api.dlocal.com
-    tags:
-      - Payments
-      - Payins
-      - Cards
-      - Bank Transfers
-      - Mobile Money
-    properties:
-      - type: Documentation
-        url: https://docs.dlocal.com/docs/full-api
-      - type: OpenAPI
-        url: https://docs.dlocal.com/llms.txt
-      - type: Authentication
-        url: https://docs.dlocal.com/reference/payins-security
-      - type: PostmanCollection
-        url: https://docs.dlocal.com/reference/postman-api-collection
-  - name: dLocal Payouts API
-    description: Distribute funds globally with multi-currency support and local compliance across 60+ emerging market countries. Includes payout submission and retrieval, balance checking, quote generation for currency exchange, payout cancellation and release, and account-specific operations.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.dlocal.com/reference/api
-    baseURL: https://api.dlocal.com
-    tags:
-      - Payouts
-      - Disbursements
-      - Currency Exchange
-      - Mass Payments
-    properties:
-      - type: Documentation
-        url: https://docs.dlocal.com/docs/full-api
-      - type: Authentication
-        url: https://docs.dlocal.com/reference/payins-security
-  - name: dLocal Platforms API
-    description: Complete solution for marketplaces and platforms with automated account onboarding, KYC information handling, bank account management, transfer operations, and account status and balance queries.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.dlocal.com/reference/api
-    baseURL: https://api.dlocal.com
-    tags:
-      - Platforms
-      - Marketplaces
-      - KYC
-      - Onboarding
-    properties:
-      - type: Documentation
-        url: https://docs.dlocal.com/docs/full-api
-      - type: Authentication
-        url: https://docs.dlocal.com/reference/payins-security
-  - name: dLocal Verification API
-    description: Identity verification and document management API supporting verification creation and retrieval, document management, and status updates for compliance workflows across emerging markets.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.dlocal.com/reference/api
-    baseURL: https://api.dlocal.com
-    tags:
-      - Verification
-      - KYC
-      - Identity
-      - Compliance
-    properties:
-      - type: Documentation
-        url: https://docs.dlocal.com/docs/full-api
-      - type: Authentication
-        url: https://docs.dlocal.com/reference/payins-security
+- name: dLocal Payouts API
+  description: >-
+    Distribute funds globally with multi-currency support and local compliance across 60+ emerging market
+    countries. Includes payout submission and retrieval, balance checking, quote generation for currency
+    exchange, payout cancellation and release, and account-specific operations.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Payouts
+  - Disbursements
+  - Currency Exchange
+  - Mass Payments
+  properties:
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+- name: dLocal Platforms API
+  description: >-
+    Complete solution for marketplaces and platforms with automated account onboarding, KYC information
+    handling, bank account management, transfer operations, and account status and balance queries.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Platforms
+  - Marketplaces
+  - KYC
+  - Onboarding
+  properties:
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+- name: dLocal Verification API
+  description: >-
+    Identity verification and document management API supporting verification creation and retrieval,
+    document management, and status updates for compliance workflows across emerging markets.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Verification
+  - KYC
+  - Identity
+  - Compliance
+  properties:
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+- aid: dlocal:dlocal-accounts-api
+  name: dLocal Accounts API
+  description: Platform sub-account management
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-balance-api
+  name: dLocal Balance API
+  description: Query account balances
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Balance
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-balance-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-bank-accounts-api
+  name: dLocal Bank Accounts API
+  description: Bank account registration and management
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Bank Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-bank-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-chargebacks-api
+  name: dLocal Chargebacks API
+  description: Manage chargeback disputes
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Chargebacks
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-chargebacks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-currency-api
+  name: dLocal Currency API
+  description: Foreign exchange rate queries
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Currency
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-currency-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-documents-api
+  name: dLocal Documents API
+  description: Document upload and management
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-documents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-kyc-api
+  name: dLocal KYC API
+  description: Know Your Customer verification
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - KYC
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-kyc-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-payment-methods-api
+  name: dLocal Payment Methods API
+  description: Query available local payment methods
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Payment Methods
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-payment-methods-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-payments-api
+  name: dLocal Payments API
+  description: Create and manage payment transactions
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-payments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-payouts-api
+  name: dLocal Payouts API
+  description: Submit and manage disbursements
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Payouts
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-payouts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-refunds-api
+  name: dLocal Refunds API
+  description: Reverse payment transactions
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Refunds
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-refunds-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-tokens-api
+  name: dLocal Tokens API
+  description: Card tokenization operations
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-transfers-api
+  name: dLocal Transfers API
+  description: Fund transfers between accounts
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-transfers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
+- aid: dlocal:dlocal-verifications-api
+  name: dLocal Verifications API
+  description: Identity verification requests
+  humanURL: https://docs.dlocal.com/reference/api
+  baseURL: https://api.dlocal.com
+  tags:
+  - Verifications
+  properties:
+  - type: OpenAPI
+    url: openapi/dlocal-verifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.dlocal.com/docs/full-api
+  - type: Authentication
+    url: https://docs.dlocal.com/reference/payins-security
+  - type: PostmanCollection
+    url: https://docs.dlocal.com/reference/postman-api-collection
 common:
   - type: AgenticAccess
     url: agentic-access/dlocal-agentic-access.yml
