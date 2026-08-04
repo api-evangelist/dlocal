@@ -1,0 +1,460 @@
+openapi: 3.0.3
+info:
+  title: dLocal Payouts API
+  description: >
+    Distribute funds globally with multi-currency support and local compliance across 60+
+    emerging market countries. Includes payout submission and retrieval, balance checking,
+    quote generation for currency exchange, payout cancellation and release, and
+    account-specific operations.
+  version: "3.0"
+  contact:
+    name: dLocal Developer Support
+    url: https://docs.dlocal.com/
+servers:
+  - url: https://api.dlocal.com
+    description: Production
+  - url: https://sandbox.dlocal.com
+    description: Sandbox
+security:
+  - HmacAuth: []
+paths:
+  /payouts:
+    post:
+      summary: Submit a Payout
+      description: >
+        Submit a payout to a recipient in an emerging market country. Supports bank
+        transfers, mobile money, and other local disbursement methods.
+      operationId: createPayout
+      tags:
+        - Payouts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePayoutRequest'
+            example:
+              login: "merchant_login"
+              trans_key: "merchant_trans_key"
+              request_id: "REQ-001"
+              currency: "USD"
+              amount: 250.00
+              country: "BR"
+              beneficiary:
+                name: "Maria Silva"
+                lastname: "Silva"
+                document: "12345678901"
+                email: "maria@example.com"
+                bank_account:
+                  type: "C"
+                  number: "12345-6"
+                  agency: "0001"
+                  bank_code: "341"
+              payment_method_id: "BT"
+              notification_url: "https://webhook.site/payout-notify"
+      responses:
+        "200":
+          description: Payout submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payout'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /payouts/{payout_id}:
+    get:
+      summary: Retrieve a Payout
+      description: Get status and details of a specific payout.
+      operationId: getPayout
+      tags:
+        - Payouts
+      parameters:
+        - name: payout_id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "PO-123456789"
+      responses:
+        "200":
+          description: Payout retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payout'
+        "404":
+          description: Payout not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /payouts/merchant_request_id/{request_id}:
+    get:
+      summary: Retrieve a Payout by Request ID
+      description: Retrieve payout details using the merchant's own request identifier.
+      operationId: getPayoutByRequestId
+      tags:
+        - Payouts
+      parameters:
+        - name: request_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Payout retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payout'
+  /payouts/{payout_id}/cancel:
+    post:
+      summary: Cancel a Payout
+      description: Cancel a pending payout that has not yet been processed.
+      operationId: cancelPayout
+      tags:
+        - Payouts
+      parameters:
+        - name: payout_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Payout cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payout'
+  /payouts/{payout_id}/release:
+    post:
+      summary: Release a Payout
+      description: Release a payout that was held for compliance review.
+      operationId: releasePayout
+      tags:
+        - Payouts
+      parameters:
+        - name: payout_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Payout released
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payout'
+  /balances:
+    get:
+      summary: Get Account Balance
+      description: Retrieve the current balance for the merchant account across currencies.
+      operationId: getBalance
+      tags:
+        - Balance
+      parameters:
+        - name: currency
+          in: query
+          required: false
+          description: Filter by specific currency
+          schema:
+            type: string
+            example: "USD"
+      responses:
+        "200":
+          description: Balance retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balances:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Balance'
+  /fx-rates/quotes:
+    post:
+      summary: Generate FX Quote
+      description: >
+        Generate a currency exchange quote for a payout. The quote locks in a rate
+        for a short period.
+      operationId: createFxQuote
+      tags:
+        - Currency
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - from_currency
+                - to_currency
+                - amount
+                - country
+              properties:
+                from_currency:
+                  type: string
+                  example: "USD"
+                to_currency:
+                  type: string
+                  example: "BRL"
+                amount:
+                  type: number
+                  format: float
+                  example: 1000.00
+                country:
+                  type: string
+                  example: "BR"
+      responses:
+        "200":
+          description: FX quote generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FxQuote'
+components:
+  securitySchemes:
+    HmacAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >
+        HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}"
+        Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+  schemas:
+    CreatePayoutRequest:
+      type: object
+      required:
+        - request_id
+        - currency
+        - amount
+        - country
+        - beneficiary
+        - payment_method_id
+      properties:
+        login:
+          type: string
+          description: Merchant login (may be in header instead)
+        trans_key:
+          type: string
+          description: Transaction key (may be in header instead)
+        request_id:
+          type: string
+          description: Unique merchant-assigned identifier for this payout
+          example: "REQ-001"
+        currency:
+          type: string
+          description: ISO 4217 currency code
+          example: "USD"
+        amount:
+          type: number
+          format: float
+          description: Payout amount
+          example: 250.00
+        amount_in_usd:
+          type: number
+          format: float
+          description: Amount in USD equivalent
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+          example: "BR"
+        payment_method_id:
+          type: string
+          description: >
+            Payment method code (e.g. BT for bank transfer, MM for mobile money)
+          example: "BT"
+        beneficiary:
+          $ref: '#/components/schemas/Beneficiary'
+        comment:
+          type: string
+          description: Internal comment for the payout
+        notification_url:
+          type: string
+          format: uri
+          description: Webhook URL for payout status notifications
+        purpose:
+          type: string
+          description: Purpose of the payout for compliance
+        fx_quote_id:
+          type: string
+          description: FX quote ID to lock in exchange rate
+    Payout:
+      type: object
+      properties:
+        id:
+          type: string
+          description: dLocal payout identifier
+          example: "PO-123456789"
+        request_id:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        country:
+          type: string
+        beneficiary:
+          $ref: '#/components/schemas/Beneficiary'
+        payment_method_id:
+          type: string
+        status:
+          type: string
+          enum:
+            - PENDING
+            - PROCESSING
+            - PAID
+            - REJECTED
+            - CANCELLED
+            - HELD
+          description: Current payout status
+        status_code:
+          type: string
+        status_detail:
+          type: string
+        created_date:
+          type: string
+          format: date-time
+        updated_date:
+          type: string
+          format: date-time
+        transaction_id:
+          type: string
+    Beneficiary:
+      type: object
+      required:
+        - name
+        - document
+      properties:
+        name:
+          type: string
+          example: "Maria Silva"
+        lastname:
+          type: string
+        document:
+          type: string
+          description: National ID or tax document
+          example: "12345678901"
+        document_type:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        bank_account:
+          $ref: '#/components/schemas/BankAccount'
+        mobile_wallet:
+          $ref: '#/components/schemas/MobileWallet'
+    BankAccount:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - C
+            - S
+          description: Account type - C for Checking, S for Savings
+        number:
+          type: string
+        agency:
+          type: string
+        bank_code:
+          type: string
+        clabe:
+          type: string
+          description: CLABE number for Mexico
+        iban:
+          type: string
+    MobileWallet:
+      type: object
+      properties:
+        phone:
+          type: string
+        provider:
+          type: string
+    Balance:
+      type: object
+      properties:
+        currency:
+          type: string
+        amount:
+          type: number
+          format: float
+        available_amount:
+          type: number
+          format: float
+        pending_amount:
+          type: number
+          format: float
+    FxQuote:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Quote identifier to use in payout requests
+        from_currency:
+          type: string
+        to_currency:
+          type: string
+        rate:
+          type: number
+          format: float
+          description: Exchange rate applied
+        from_amount:
+          type: number
+          format: float
+        to_amount:
+          type: number
+          format: float
+        valid_until:
+          type: string
+          format: date-time
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        number:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+        country:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        param:
+          type: string
+tags:
+  - name: Payouts
+    description: Submit and manage disbursements
+  - name: Balance
+    description: Query account balances
+  - name: Currency
+    description: Foreign exchange quotes

@@ -1,0 +1,40 @@
+{
+  "provider": "dlocal",
+  "sources": [
+    "dlocal-accounts-api-openapi.yml",
+    "dlocal-balance-api-openapi.yml",
+    "dlocal-bank-accounts-api-openapi.yml",
+    "dlocal-chargebacks-api-openapi.yml",
+    "dlocal-currency-api-openapi.yml",
+    "dlocal-documents-api-openapi.yml",
+    "dlocal-kyc-api-openapi.yml",
+    "dlocal-payment-methods-api-openapi.yml",
+    "dlocal-payments-api-openapi.yml",
+    "dlocal-payouts-api-openapi.yml",
+    "dlocal-refunds-api-openapi.yml",
+    "dlocal-tokens-api-openapi.yml",
+    "dlocal-transfers-api-openapi.yml",
+    "dlocal-verifications-api-openapi.yml"
+  ],
+  "outputs": [
+    "dlocal-accounts-api-openapi.yml",
+    "dlocal-balance-api-openapi.yml",
+    "dlocal-bank-accounts-api-openapi.yml",
+    "dlocal-chargebacks-api-openapi.yml",
+    "dlocal-currency-api-openapi.yml",
+    "dlocal-documents-api-openapi.yml",
+    "dlocal-kyc-api-openapi.yml",
+    "dlocal-payment-methods-api-openapi.yml",
+    "dlocal-payments-api-openapi.yml",
+    "dlocal-payouts-api-openapi.yml",
+    "dlocal-refunds-api-openapi.yml",
+    "dlocal-tokens-api-openapi.yml",
+    "dlocal-transfers-api-openapi.yml",
+    "dlocal-verifications-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
