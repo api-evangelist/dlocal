@@ -1,0 +1,692 @@
+{
+  "item": [
+    {
+      "id": "44492063-6383-49bb-baab-856f9ab94d30",
+      "name": "Payouts",
+      "description": {
+        "content": "Submit and manage disbursements",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f3791cb7-0a1d-4b5a-96f3-ef7443542400",
+          "name": "Submit a Payout",
+          "request": {
+            "name": "Submit a Payout",
+            "description": {
+              "content": "Submit a payout to a recipient in an emerging market country. Supports bank transfers, mobile money, and other local disbursement methods.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payouts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request_id\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"amount\": \"<float>\",\n  \"country\": \"<string>\",\n  \"beneficiary\": {\n    \"name\": \"<string>\",\n    \"document\": \"<string>\",\n    \"lastname\": \"<string>\",\n    \"document_type\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"bank_account\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"agency\": \"<string>\",\n      \"bank_code\": \"<string>\",\n      \"clabe\": \"<string>\",\n      \"iban\": \"<string>\"\n    },\n    \"mobile_wallet\": {\n      \"phone\": \"<string>\",\n      \"provider\": \"<string>\"\n    }\n  },\n  \"payment_method_id\": \"<string>\",\n  \"login\": \"<string>\",\n  \"trans_key\": \"<string>\",\n  \"amount_in_usd\": \"<float>\",\n  \"comment\": \"<string>\",\n  \"notification_url\": \"<uri>\",\n  \"purpose\": \"<string>\",\n  \"fx_quote_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d88bfef1-d281-44bc-8e28-e1ca3db2f0e0",
+              "name": "Payout submitted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"login\": \"merchant_login\",\n  \"trans_key\": \"merchant_trans_key\",\n  \"request_id\": \"REQ-001\",\n  \"currency\": \"USD\",\n  \"amount\": 250,\n  \"country\": \"BR\",\n  \"beneficiary\": {\n    \"name\": \"Maria Silva\",\n    \"lastname\": \"Silva\",\n    \"document\": \"12345678901\",\n    \"email\": \"maria@example.com\",\n    \"bank_account\": {\n      \"type\": \"C\",\n      \"number\": \"12345-6\",\n      \"agency\": \"0001\",\n      \"bank_code\": \"341\"\n    }\n  },\n  \"payment_method_id\": \"BT\",\n  \"notification_url\": \"https://webhook.site/payout-notify\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PO-123456789\",\n  \"request_id\": \"string\",\n  \"amount\": 1692.966346701581,\n  \"currency\": \"string\",\n  \"country\": \"string\",\n  \"beneficiary\": {\n    \"name\": \"Maria Silva\",\n    \"document\": \"12345678901\",\n    \"lastname\": \"<string>\",\n    \"document_type\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"bank_account\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"agency\": \"<string>\",\n      \"bank_code\": \"<string>\",\n      \"clabe\": \"<string>\",\n      \"iban\": \"<string>\"\n    },\n    \"mobile_wallet\": {\n      \"phone\": \"<string>\",\n      \"provider\": \"<string>\"\n    }\n  },\n  \"payment_method_id\": \"string\",\n  \"status\": \"PROCESSING\",\n  \"status_code\": \"string\",\n  \"status_detail\": \"string\",\n  \"created_date\": \"1991-09-19T02:53:34.010Z\",\n  \"updated_date\": \"1952-03-09T12:29:08.452Z\",\n  \"transaction_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "686a8d8b-a12f-4934-9fb6-0839fde3a0f5",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"login\": \"merchant_login\",\n  \"trans_key\": \"merchant_trans_key\",\n  \"request_id\": \"REQ-001\",\n  \"currency\": \"USD\",\n  \"amount\": 250,\n  \"country\": \"BR\",\n  \"beneficiary\": {\n    \"name\": \"Maria Silva\",\n    \"lastname\": \"Silva\",\n    \"document\": \"12345678901\",\n    \"email\": \"maria@example.com\",\n    \"bank_account\": {\n      \"type\": \"C\",\n      \"number\": \"12345-6\",\n      \"agency\": \"0001\",\n      \"bank_code\": \"341\"\n    }\n  },\n  \"payment_method_id\": \"BT\",\n  \"notification_url\": \"https://webhook.site/payout-notify\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6184,\n  \"message\": \"string\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d578e6f-a41c-4854-bd49-d6ec66b0ec5e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"login\": \"merchant_login\",\n  \"trans_key\": \"merchant_trans_key\",\n  \"request_id\": \"REQ-001\",\n  \"currency\": \"USD\",\n  \"amount\": 250,\n  \"country\": \"BR\",\n  \"beneficiary\": {\n    \"name\": \"Maria Silva\",\n    \"lastname\": \"Silva\",\n    \"document\": \"12345678901\",\n    \"email\": \"maria@example.com\",\n    \"bank_account\": {\n      \"type\": \"C\",\n      \"number\": \"12345-6\",\n      \"agency\": \"0001\",\n      \"bank_code\": \"341\"\n    }\n  },\n  \"payment_method_id\": \"BT\",\n  \"notification_url\": \"https://webhook.site/payout-notify\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6184,\n  \"message\": \"string\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "add851f2-6cae-4012-8dc2-6c7d8b348d5d",
+          "name": "Retrieve a Payout",
+          "request": {
+            "name": "Retrieve a Payout",
+            "description": {
+              "content": "Get status and details of a specific payout.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payouts",
+                ":payout_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payout_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79834b72-76cd-4f66-96ee-8f3b5e688550",
+              "name": "Payout retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    ":payout_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payout_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PO-123456789\",\n  \"request_id\": \"string\",\n  \"amount\": 1692.966346701581,\n  \"currency\": \"string\",\n  \"country\": \"string\",\n  \"beneficiary\": {\n    \"name\": \"Maria Silva\",\n    \"document\": \"12345678901\",\n    \"lastname\": \"<string>\",\n    \"document_type\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"bank_account\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"agency\": \"<string>\",\n      \"bank_code\": \"<string>\",\n      \"clabe\": \"<string>\",\n      \"iban\": \"<string>\"\n    },\n    \"mobile_wallet\": {\n      \"phone\": \"<string>\",\n      \"provider\": \"<string>\"\n    }\n  },\n  \"payment_method_id\": \"string\",\n  \"status\": \"PROCESSING\",\n  \"status_code\": \"string\",\n  \"status_detail\": \"string\",\n  \"created_date\": \"1991-09-19T02:53:34.010Z\",\n  \"updated_date\": \"1952-03-09T12:29:08.452Z\",\n  \"transaction_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93d1f5d0-5a5e-4b57-aacc-ce85b3035384",
+              "name": "Payout not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    ":payout_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payout_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6184,\n  \"message\": \"string\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e454b4dd-142d-4c6d-8437-3f9ebe066781",
+          "name": "Retrieve a Payout by Request ID",
+          "request": {
+            "name": "Retrieve a Payout by Request ID",
+            "description": {
+              "content": "Retrieve payout details using the merchant's own request identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payouts",
+                "merchant_request_id",
+                ":request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7708a66d-2c1a-40fe-a026-1fad3474b0fc",
+              "name": "Payout retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    "merchant_request_id",
+                    ":request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PO-123456789\",\n  \"request_id\": \"string\",\n  \"amount\": 1692.966346701581,\n  \"currency\": \"string\",\n  \"country\": \"string\",\n  \"beneficiary\": {\n    \"name\": \"Maria Silva\",\n    \"document\": \"12345678901\",\n    \"lastname\": \"<string>\",\n    \"document_type\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"bank_account\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"agency\": \"<string>\",\n      \"bank_code\": \"<string>\",\n      \"clabe\": \"<string>\",\n      \"iban\": \"<string>\"\n    },\n    \"mobile_wallet\": {\n      \"phone\": \"<string>\",\n      \"provider\": \"<string>\"\n    }\n  },\n  \"payment_method_id\": \"string\",\n  \"status\": \"PROCESSING\",\n  \"status_code\": \"string\",\n  \"status_detail\": \"string\",\n  \"created_date\": \"1991-09-19T02:53:34.010Z\",\n  \"updated_date\": \"1952-03-09T12:29:08.452Z\",\n  \"transaction_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0c46c59-9504-48bf-938b-a28e43513336",
+          "name": "Cancel a Payout",
+          "request": {
+            "name": "Cancel a Payout",
+            "description": {
+              "content": "Cancel a pending payout that has not yet been processed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payouts",
+                ":payout_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payout_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cae106ac-8764-4caf-b6da-f03cf992ec9c",
+              "name": "Payout cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    ":payout_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payout_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PO-123456789\",\n  \"request_id\": \"string\",\n  \"amount\": 1692.966346701581,\n  \"currency\": \"string\",\n  \"country\": \"string\",\n  \"beneficiary\": {\n    \"name\": \"Maria Silva\",\n    \"document\": \"12345678901\",\n    \"lastname\": \"<string>\",\n    \"document_type\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"bank_account\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"agency\": \"<string>\",\n      \"bank_code\": \"<string>\",\n      \"clabe\": \"<string>\",\n      \"iban\": \"<string>\"\n    },\n    \"mobile_wallet\": {\n      \"phone\": \"<string>\",\n      \"provider\": \"<string>\"\n    }\n  },\n  \"payment_method_id\": \"string\",\n  \"status\": \"PROCESSING\",\n  \"status_code\": \"string\",\n  \"status_detail\": \"string\",\n  \"created_date\": \"1991-09-19T02:53:34.010Z\",\n  \"updated_date\": \"1952-03-09T12:29:08.452Z\",\n  \"transaction_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "658bfe09-080f-4c0f-a59f-221fa405d6bc",
+          "name": "Release a Payout",
+          "request": {
+            "name": "Release a Payout",
+            "description": {
+              "content": "Release a payout that was held for compliance review.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payouts",
+                ":payout_id",
+                "release"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payout_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73fb07c8-44cc-4932-88fc-364d0ffe6841",
+              "name": "Payout released",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payouts",
+                    ":payout_id",
+                    "release"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payout_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PO-123456789\",\n  \"request_id\": \"string\",\n  \"amount\": 1692.966346701581,\n  \"currency\": \"string\",\n  \"country\": \"string\",\n  \"beneficiary\": {\n    \"name\": \"Maria Silva\",\n    \"document\": \"12345678901\",\n    \"lastname\": \"<string>\",\n    \"document_type\": \"<string>\",\n    \"email\": \"<email>\",\n    \"phone\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"bank_account\": {\n      \"type\": \"<string>\",\n      \"number\": \"<string>\",\n      \"agency\": \"<string>\",\n      \"bank_code\": \"<string>\",\n      \"clabe\": \"<string>\",\n      \"iban\": \"<string>\"\n    },\n    \"mobile_wallet\": {\n      \"phone\": \"<string>\",\n      \"provider\": \"<string>\"\n    }\n  },\n  \"payment_method_id\": \"string\",\n  \"status\": \"PROCESSING\",\n  \"status_code\": \"string\",\n  \"status_detail\": \"string\",\n  \"created_date\": \"1991-09-19T02:53:34.010Z\",\n  \"updated_date\": \"1952-03-09T12:29:08.452Z\",\n  \"transaction_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b4b58a31-d72b-4e75-a5c3-598911ec3e02",
+    "name": "dLocal Payins Accounts Payouts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.\n\n\nContact Support:\n Name: dLocal Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

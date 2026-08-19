@@ -1,0 +1,244 @@
+{
+  "item": [
+    {
+      "id": "ee260afe-ca34-44d7-af2c-3e2c67c76504",
+      "name": "Transfers",
+      "description": {
+        "content": "Fund transfers between accounts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b6a489a3-c31d-40b2-a6b2-9d15a83e8b45",
+          "name": "Create a Transfer",
+          "request": {
+            "name": "Create a Transfer",
+            "description": {
+              "content": "Transfer funds between the platform account and a sub-account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transfers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_id\": \"<string>\",\n  \"amount\": \"<float>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"reference_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ee5892a-0752-4f4b-8f90-2104755c5bed",
+              "name": "Transfer created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transfers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"account_id\": \"<string>\",\n  \"amount\": \"<float>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"reference_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"account_id\": \"string\",\n  \"amount\": 3276.49506750613,\n  \"currency\": \"string\",\n  \"status\": \"FAILED\",\n  \"description\": \"string\",\n  \"reference_id\": \"string\",\n  \"created_date\": \"1962-11-04T14:44:43.264Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a57e3de-4149-4dff-9955-9d2b6590d15a",
+          "name": "Get Transfer Status",
+          "request": {
+            "name": "Get Transfer Status",
+            "description": {
+              "content": "Retrieve the status and details of a transfer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transfers",
+                ":transfer_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transfer_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd6dc7c0-e309-4941-af9b-1f55af75c9f4",
+              "name": "Transfer retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transfers",
+                    ":transfer_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transfer_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"account_id\": \"string\",\n  \"amount\": 3276.49506750613,\n  \"currency\": \"string\",\n  \"status\": \"FAILED\",\n  \"description\": \"string\",\n  \"reference_id\": \"string\",\n  \"created_date\": \"1962-11-04T14:44:43.264Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dd336541-2093-4932-924d-6be3c973e6b0",
+    "name": "dLocal Payins Accounts Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.\n\n\nContact Support:\n Name: dLocal Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

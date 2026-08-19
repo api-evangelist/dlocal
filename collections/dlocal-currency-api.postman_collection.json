@@ -1,0 +1,260 @@
+{
+  "item": [
+    {
+      "id": "76abe1b9-06e1-4beb-a5b8-2ac08d416121",
+      "name": "Currency",
+      "description": {
+        "content": "Foreign exchange rate queries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5059961b-b106-4812-8f16-71aa287e9c61",
+          "name": "Get FX Rate",
+          "request": {
+            "name": "Get FX Rate",
+            "description": {
+              "content": "Retrieve foreign exchange rates for currency conversion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fx-rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1780f89a-3bb8-4025-b3ca-276048a4c573",
+              "name": "FX rate retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fx-rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "to",
+                      "value": "BRL"
+                    },
+                    {
+                      "key": "country",
+                      "value": "BR"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"from\": \"string\",\n  \"to\": \"string\",\n  \"rate\": 369.4203929231821,\n  \"valid_until\": \"1952-12-15T06:50:59.786Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a25d4926-c59c-41f6-891a-c5a157216917",
+          "name": "Generate FX Quote",
+          "request": {
+            "name": "Generate FX Quote",
+            "description": {
+              "content": "Generate a currency exchange quote for a payout. The quote locks in a rate for a short period.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fx-rates",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from_currency\": \"<string>\",\n  \"to_currency\": \"<string>\",\n  \"amount\": \"<float>\",\n  \"country\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ec0aee5-6469-4df4-bb04-4b3c1155cbc1",
+              "name": "FX quote generated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fx-rates",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from_currency\": \"USD\",\n  \"to_currency\": \"BRL\",\n  \"amount\": 1000,\n  \"country\": \"BR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"from_currency\": \"string\",\n  \"to_currency\": \"string\",\n  \"rate\": 1552.0487279020012,\n  \"from_amount\": 4163.2261272846945,\n  \"to_amount\": 592.699497699335,\n  \"valid_until\": \"1968-11-09T14:27:11.449Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "429ec96a-5bc9-4f48-b2b0-30227d54fc73",
+    "name": "dLocal Payins Accounts Currency API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.\n\n\nContact Support:\n Name: dLocal Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

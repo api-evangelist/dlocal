@@ -1,0 +1,148 @@
+{
+  "item": [
+    {
+      "id": "7a43bc48-9e9b-49ca-bab2-ad894cea879e",
+      "name": "Tokens",
+      "description": {
+        "content": "Card tokenization operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "196d9cf2-328c-4503-94f4-e8bba9b07ccd",
+          "name": "Create a Card Token",
+          "request": {
+            "name": "Create a Card Token",
+            "description": {
+              "content": "Tokenize card data for future payments without storing raw card details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"holder_name\": \"<string>\",\n  \"number\": \"<string>\",\n  \"cvv\": \"<string>\",\n  \"expiration_month\": \"<integer>\",\n  \"expiration_year\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba1da5d4-dd19-4a4b-9ab3-453a32ad61ac",
+              "name": "Token created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"holder_name\": \"<string>\",\n  \"number\": \"<string>\",\n  \"cvv\": \"<string>\",\n  \"expiration_month\": \"<integer>\",\n  \"expiration_year\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"holder_name\": \"string\",\n  \"expiration_month\": 3554,\n  \"expiration_year\": 1806,\n  \"last4\": \"string\",\n  \"brand\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3d11830c-d4b8-43f2-ac6b-fda93696b056",
+    "name": "dLocal Payins Accounts Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.\n\n\nContact Support:\n Name: dLocal Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dLocal Payins Accounts Payments API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dlocal.com/payments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new payment using a card_id or token. For payments with raw card data use /secure_payments instead.\n"
+        },
+        {
+          "info": {
+            "name": "Create a Secure Payment (with Card Data)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dlocal.com/secure_payments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a payment passing raw card data (number, expiration, CVV). Requires PCI DSS compliance.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dlocal.com/payments/:payment_id",
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique payment identifier"
+              }
+            ]
+          },
+          "docs": "Get the status and details of a specific payment."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Payment by Order ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dlocal.com/payments/merchant_order_id/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "Merchant order identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve payment details using the merchant's own order identifier."
+        },
+        {
+          "info": {
+            "name": "Cancel a Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dlocal.com/payments/:payment_id/cancel",
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a pending payment that has not yet been completed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

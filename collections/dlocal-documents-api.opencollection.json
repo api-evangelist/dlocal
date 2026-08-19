@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dLocal Payins Accounts Documents API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Verification Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dlocal.com/verifications/:verification_id/documents",
+            "params": [
+              {
+                "name": "verification_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all documents submitted for a verification request."
+        },
+        {
+          "info": {
+            "name": "Upload Verification Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dlocal.com/verifications/:verification_id/documents",
+            "params": [
+              {
+                "name": "verification_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload a document for an active verification request."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

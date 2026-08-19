@@ -1,0 +1,466 @@
+{
+  "item": [
+    {
+      "id": "2d6c3cff-c6db-4b29-8b3e-6681bcf3b8f3",
+      "name": "Verifications",
+      "description": {
+        "content": "Identity verification requests",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5cd67cfb-726c-4408-86d1-e58e254d5184",
+          "name": "Create a Verification",
+          "request": {
+            "name": "Create a Verification",
+            "description": {
+              "content": "Initiate an identity verification request. Supports PAYOUT_HOLD and REMITTANCE verification types.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"order_id\": \"<string>\",\n  \"payer\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"document\": \"<string>\",\n    \"document_type\": \"<string>\",\n    \"country\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"phone\": \"<string>\"\n  },\n  \"notification_url\": \"<uri>\",\n  \"callback_url\": \"<uri>\",\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "986412db-ad10-48d4-84a2-61dd0ba9aa76",
+              "name": "Verification created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"PAYOUT_HOLD\",\n  \"order_id\": \"VER-001\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\",\n    \"document_type\": \"CPF\",\n    \"country\": \"BR\"\n  },\n  \"notification_url\": \"https://webhook.site/verification\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"VER-ABCD1234\",\n  \"type\": \"PAYOUT_HOLD\",\n  \"order_id\": \"string\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"<email>\",\n    \"document\": \"<string>\",\n    \"document_type\": \"<string>\",\n    \"country\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"phone\": \"<string>\"\n  },\n  \"status\": \"EXPIRED\",\n  \"status_detail\": \"string\",\n  \"redirect_url\": \"https://CnzgnYdXWvRKSnaNYmTpJNq.gubExf2BMiZLPgma1nlZ8BVNqrgNtqmgDP.\",\n  \"created_date\": \"1956-11-27T03:18:40.917Z\",\n  \"updated_date\": \"2010-12-30T11:57:02.002Z\",\n  \"expiration_date\": \"1970-02-02T10:28:41.879Z\",\n  \"documents\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"side\": \"string\",\n      \"filename\": \"string\",\n      \"status\": \"PENDING\",\n      \"rejection_reason\": \"string\",\n      \"uploaded_date\": \"1999-06-22T18:17:34.731Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"side\": \"string\",\n      \"filename\": \"string\",\n      \"status\": \"REJECTED\",\n      \"rejection_reason\": \"string\",\n      \"uploaded_date\": \"2014-04-15T15:56:06.531Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cb1572d-ce63-477e-a20b-6f1e62840845",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"PAYOUT_HOLD\",\n  \"order_id\": \"VER-001\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\",\n    \"document_type\": \"CPF\",\n    \"country\": \"BR\"\n  },\n  \"notification_url\": \"https://webhook.site/verification\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8805,\n  \"message\": \"string\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be05f197-2796-4a6e-bf97-6cd2a5504ecc",
+          "name": "Retrieve a Verification",
+          "request": {
+            "name": "Retrieve a Verification",
+            "description": {
+              "content": "Get status and details of a specific verification request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verifications",
+                ":verification_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "verification_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85f6070c-eff6-459c-9a0c-8dcc300f30f0",
+              "name": "Verification retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verifications",
+                    ":verification_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "verification_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"VER-ABCD1234\",\n  \"type\": \"PAYOUT_HOLD\",\n  \"order_id\": \"string\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"<email>\",\n    \"document\": \"<string>\",\n    \"document_type\": \"<string>\",\n    \"country\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"phone\": \"<string>\"\n  },\n  \"status\": \"IN_PROGRESS\",\n  \"status_detail\": \"string\",\n  \"redirect_url\": \"http://QCvraxLRISVpiAUyTSaJBcVu.gebo9k.,-XAYb5LXXrAlrnDmq0NtJZyebTE87alTfUbSTxTXW2Sbf9\",\n  \"created_date\": \"2016-10-30T08:56:44.589Z\",\n  \"updated_date\": \"1956-06-09T00:58:09.752Z\",\n  \"expiration_date\": \"2000-08-08T18:16:35.563Z\",\n  \"documents\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"side\": \"string\",\n      \"filename\": \"string\",\n      \"status\": \"PENDING\",\n      \"rejection_reason\": \"string\",\n      \"uploaded_date\": \"1994-07-15T08:34:26.493Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"side\": \"string\",\n      \"filename\": \"string\",\n      \"status\": \"REJECTED\",\n      \"rejection_reason\": \"string\",\n      \"uploaded_date\": \"1991-04-07T10:35:56.559Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ef4888e-b3c7-4c96-8acc-c120a2bb922c",
+              "name": "Verification not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verifications",
+                    ":verification_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "verification_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 8805,\n  \"message\": \"string\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "311ce886-6ee3-444c-a0bf-8a363969730d",
+          "name": "Update Verification Status",
+          "request": {
+            "name": "Update Verification Status",
+            "description": {
+              "content": "Update the status of a verification (e.g., approve or reject during compliance workflows).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verifications",
+                ":verification_id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "verification_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae7c86c2-1366-4c50-90ab-e6a3f8fb714e",
+              "name": "Status updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verifications",
+                    ":verification_id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "verification_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"VER-ABCD1234\",\n  \"type\": \"PAYOUT_HOLD\",\n  \"order_id\": \"string\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"<email>\",\n    \"document\": \"<string>\",\n    \"document_type\": \"<string>\",\n    \"country\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"phone\": \"<string>\"\n  },\n  \"status\": \"IN_PROGRESS\",\n  \"status_detail\": \"string\",\n  \"redirect_url\": \"http://QCvraxLRISVpiAUyTSaJBcVu.gebo9k.,-XAYb5LXXrAlrnDmq0NtJZyebTE87alTfUbSTxTXW2Sbf9\",\n  \"created_date\": \"2016-10-30T08:56:44.589Z\",\n  \"updated_date\": \"1956-06-09T00:58:09.752Z\",\n  \"expiration_date\": \"2000-08-08T18:16:35.563Z\",\n  \"documents\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"side\": \"string\",\n      \"filename\": \"string\",\n      \"status\": \"PENDING\",\n      \"rejection_reason\": \"string\",\n      \"uploaded_date\": \"1994-07-15T08:34:26.493Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"side\": \"string\",\n      \"filename\": \"string\",\n      \"status\": \"REJECTED\",\n      \"rejection_reason\": \"string\",\n      \"uploaded_date\": \"1991-04-07T10:35:56.559Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b66b3e9d-4ec1-4952-a52e-5451c5f65600",
+    "name": "dLocal Payins Accounts Verifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.\n\n\nContact Support:\n Name: dLocal Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

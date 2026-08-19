@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dLocal Payins Accounts Payouts API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payouts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit a Payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dlocal.com/payouts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a payout to a recipient in an emerging market country. Supports bank transfers, mobile money, and other local disbursement methods.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dlocal.com/payouts/:payout_id",
+            "params": [
+              {
+                "name": "payout_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get status and details of a specific payout."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Payout by Request ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dlocal.com/payouts/merchant_request_id/:request_id",
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve payout details using the merchant's own request identifier."
+        },
+        {
+          "info": {
+            "name": "Cancel a Payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dlocal.com/payouts/:payout_id/cancel",
+            "params": [
+              {
+                "name": "payout_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a pending payout that has not yet been processed."
+        },
+        {
+          "info": {
+            "name": "Release a Payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dlocal.com/payouts/:payout_id/release",
+            "params": [
+              {
+                "name": "payout_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Release a payout that was held for compliance review."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

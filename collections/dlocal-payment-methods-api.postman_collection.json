@@ -1,0 +1,149 @@
+{
+  "item": [
+    {
+      "id": "f46e5c6e-0b85-46c2-a2ac-f4b672b53a23",
+      "name": "Payment Methods",
+      "description": {
+        "content": "Query available local payment methods",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c5f14d7-e481-4cec-955e-15c3296f7653",
+          "name": "Search Payment Methods",
+          "request": {
+            "name": "Search Payment Methods",
+            "description": {
+              "content": "Retrieve available payment methods for a given country and currency.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment-methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>",
+                  "description": "(Required) ISO 3166-1 alpha-2 country code"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "ISO 4217 currency code"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73bdf4a2-0c6e-4124-8a36-b5d5fc381eab",
+              "name": "Payment methods list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment-methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "BR"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "BRL"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"payment_methods\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"WALLET\",\n      \"name\": \"string\",\n      \"logo\": \"https://ZYgWiZxlzEXIMqVshdQSbCQCbdl.iteiTxgaGTBS+xNCs-COlVc4rXAt0hmJFqYCq1FcntpNBBE8GZPXvfsyH2xbo3lZUX.ZfqEuVU\",\n      \"allowed_flows\": [\n        \"DIRECT\",\n        \"REDIRECT\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"CARD\",\n      \"name\": \"string\",\n      \"logo\": \"http://xdRhORONxYWSmS.xozb,wAmFkPTadylGTZ,-ZLemAZDCO1vr8wnldQt1a-BWTfOWB,okcNZxA81RRr11qbEGvXo+8AYmMWWL\",\n      \"allowed_flows\": [\n        \"DIRECT\",\n        \"REDIRECT\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2866551b-6fde-4681-b7d1-44e23bc4e259",
+    "name": "dLocal Payins Accounts Payment Methods API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.\n\n\nContact Support:\n Name: dLocal Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

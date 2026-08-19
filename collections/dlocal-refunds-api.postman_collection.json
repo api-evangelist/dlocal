@@ -1,0 +1,244 @@
+{
+  "item": [
+    {
+      "id": "35450470-5cd4-4224-84a9-8c50effb5ba8",
+      "name": "Refunds",
+      "description": {
+        "content": "Reverse payment transactions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8868ac04-1c11-4b0f-b573-2a59166ba5e4",
+          "name": "Create a Refund",
+          "request": {
+            "name": "Create a Refund",
+            "description": {
+              "content": "Reverse a card payment or initiate a bank transfer for alternative payment methods.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refunds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payment_id\": \"<string>\",\n  \"amount\": \"<float>\",\n  \"currency\": \"<string>\",\n  \"notification_url\": \"<uri>\",\n  \"order_refund_id\": \"<string>\",\n  \"beneficiary_name\": \"<string>\",\n  \"bank\": \"<string>\",\n  \"bank_account\": \"<string>\",\n  \"bank_account_type\": \"<string>\",\n  \"bank_branch\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2bea60d6-dcdf-4d95-abb5-848dfbdef27c",
+              "name": "Refund created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_id\": \"PAY_GWLP5LSWQP9AXGBVPFZN\",\n  \"amount\": 50,\n  \"currency\": \"USD\",\n  \"notification_url\": \"https://webhook.site/notification\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"payment_id\": \"string\",\n  \"order_refund_id\": \"string\",\n  \"amount\": 3894.406669754522,\n  \"currency\": \"string\",\n  \"status\": \"FAILED\",\n  \"status_code\": \"string\",\n  \"status_detail\": \"string\",\n  \"created_date\": \"2019-05-31T13:36:45.205Z\",\n  \"amount_refunded\": 5469.381249962781,\n  \"transaction_id\": \"string\",\n  \"authorization_code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f1e538b-2f33-44c5-8c3e-f00be60f8683",
+          "name": "Retrieve a Refund",
+          "request": {
+            "name": "Retrieve a Refund",
+            "description": {
+              "content": "Fetch details of a specific refund transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "refunds",
+                ":refund_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "refund_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d3b3e1d-993b-4269-9307-65a46f2dbcc6",
+              "name": "Refund retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "refunds",
+                    ":refund_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "refund_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"payment_id\": \"string\",\n  \"order_refund_id\": \"string\",\n  \"amount\": 3894.406669754522,\n  \"currency\": \"string\",\n  \"status\": \"FAILED\",\n  \"status_code\": \"string\",\n  \"status_detail\": \"string\",\n  \"created_date\": \"2019-05-31T13:36:45.205Z\",\n  \"amount_refunded\": 5469.381249962781,\n  \"transaction_id\": \"string\",\n  \"authorization_code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "63ce601a-e723-48c4-b7fc-2eabe93d6f28",
+    "name": "dLocal Payins Accounts Refunds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.\n\n\nContact Support:\n Name: dLocal Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

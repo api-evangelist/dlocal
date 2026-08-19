@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dLocal Payins Accounts Transfers API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dlocal.com/transfers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer funds between the platform account and a sub-account."
+        },
+        {
+          "info": {
+            "name": "Get Transfer Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dlocal.com/transfers/:transfer_id",
+            "params": [
+              {
+                "name": "transfer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the status and details of a transfer."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

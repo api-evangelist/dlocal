@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dLocal Payins Accounts Payment Methods API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Methods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Payment Methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dlocal.com/payment-methods",
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country code"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "ISO 4217 currency code"
+              }
+            ]
+          },
+          "docs": "Retrieve available payment methods for a given country and currency."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

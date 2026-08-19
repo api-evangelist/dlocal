@@ -1,0 +1,795 @@
+{
+  "item": [
+    {
+      "id": "b40fc0c5-41c8-41f8-9b20-a96bef8c1f9d",
+      "name": "Payments",
+      "description": {
+        "content": "Create and manage payment transactions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7ed59f61-9635-4e21-a79a-da9e303b80b3",
+          "name": "Create a Payment",
+          "request": {
+            "name": "Create a Payment",
+            "description": {
+              "content": "Create a new payment using a card_id or token. For payments with raw card data use /secure_payments instead.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<float>\",\n  \"currency\": \"<string>\",\n  \"payment_method_flow\": \"<string>\",\n  \"country\": \"<string>\",\n  \"payer\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"document\": \"<string>\",\n    \"document_type\": \"<string>\",\n    \"user_reference\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"phone\": \"<string>\",\n    \"ip\": \"<ipv4>\"\n  },\n  \"order_id\": \"<string>\",\n  \"currency_to_charge\": \"<string>\",\n  \"payment_method_id\": \"<string>\",\n  \"original_order_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"notification_url\": \"<uri>\",\n  \"callback_url\": \"<uri>\",\n  \"scheduled_date\": \"<date>\",\n  \"card\": {\n    \"holder_name\": \"<string>\",\n    \"number\": \"<string>\",\n    \"cvv\": \"<string>\",\n    \"expiration_month\": \"<integer>\",\n    \"expiration_year\": \"<integer>\",\n    \"card_id\": \"<string>\",\n    \"token\": \"<string>\",\n    \"installments\": \"<integer>\",\n    \"installments_id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"capture\": \"<boolean>\",\n    \"encrypted_data\": \"<string>\"\n  },\n  \"wallet\": {\n    \"token\": \"<string>\"\n  },\n  \"device\": {\n    \"device_id\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"additional_risk_data\": \"<object>\",\n  \"splits\": [\n    {\n      \"user_id\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    {\n      \"user_id\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"currency\": \"<string>\"\n    }\n  ],\n  \"remitter_user_id\": \"<string>\",\n  \"beneficiary_user_id\": \"<string>\",\n  \"subpurpose\": \"<string>\",\n  \"source_of_funds\": \"<string>\",\n  \"submerchant\": {\n    \"merchant_id\": \"<string>\",\n    \"mcc\": \"<string>\",\n    \"name\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "65fe6679-f6dc-448c-a2bc-8b39dbafd0c1",
+              "name": "Payment created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 100,\n  \"currency\": \"USD\",\n  \"payment_method_id\": \"CARD\",\n  \"payment_method_flow\": \"DIRECT\",\n  \"country\": \"BR\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\"\n  },\n  \"card\": {\n    \"card_id\": \"CV-e90078f7-e027-4ce4-84cb-534c877be33c\"\n  },\n  \"order_id\": \"5346523564\",\n  \"description\": \"Electronics purchase\",\n  \"notification_url\": \"https://webhook.site/notification\",\n  \"callback_url\": \"https://example.com/callback\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PAY_GWLP5LSWQP9AXGBVPFZN\",\n  \"amount\": 3655.704394519168,\n  \"currency\": \"string\",\n  \"payment_method_id\": \"string\",\n  \"payment_method_type\": \"string\",\n  \"payment_method_flow\": \"string\",\n  \"country\": \"string\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\",\n    \"document_type\": \"<string>\",\n    \"user_reference\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"phone\": \"<string>\",\n    \"ip\": \"<ipv4>\"\n  },\n  \"order_id\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"PAID\",\n  \"status_code\": \"string\",\n  \"status_detail\": \"string\",\n  \"created_date\": \"1975-03-21T00:48:27.207Z\",\n  \"approved_date\": \"1966-04-16T22:38:36.231Z\",\n  \"redirect_url\": \"https://AWaobBSFGwsrZCDdAFy.kljBZFkemiHoOusyCVkNiS\",\n  \"card\": {\n    \"holder_name\": \"string\",\n    \"last4\": \"string\",\n    \"brand\": \"string\",\n    \"expiration_month\": 6399,\n    \"expiration_year\": 7395,\n    \"card_id\": \"string\"\n  },\n  \"three_dsecure\": {\n    \"eci\": \"string\",\n    \"cavv\": \"string\",\n    \"xid\": \"string\",\n    \"version\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e3e96c2-b6d5-43d3-a77b-2535193d59ca",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 100,\n  \"currency\": \"USD\",\n  \"payment_method_id\": \"CARD\",\n  \"payment_method_flow\": \"DIRECT\",\n  \"country\": \"BR\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\"\n  },\n  \"card\": {\n    \"card_id\": \"CV-e90078f7-e027-4ce4-84cb-534c877be33c\"\n  },\n  \"order_id\": \"5346523564\",\n  \"description\": \"Electronics purchase\",\n  \"notification_url\": \"https://webhook.site/notification\",\n  \"callback_url\": \"https://example.com/callback\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6305,\n  \"message\": \"string\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d86b5da-1b75-46e6-866a-46f284536e9f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 100,\n  \"currency\": \"USD\",\n  \"payment_method_id\": \"CARD\",\n  \"payment_method_flow\": \"DIRECT\",\n  \"country\": \"BR\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\"\n  },\n  \"card\": {\n    \"card_id\": \"CV-e90078f7-e027-4ce4-84cb-534c877be33c\"\n  },\n  \"order_id\": \"5346523564\",\n  \"description\": \"Electronics purchase\",\n  \"notification_url\": \"https://webhook.site/notification\",\n  \"callback_url\": \"https://example.com/callback\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6305,\n  \"message\": \"string\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "881a6d14-43b0-48f6-a861-66efdad34724",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 100,\n  \"currency\": \"USD\",\n  \"payment_method_id\": \"CARD\",\n  \"payment_method_flow\": \"DIRECT\",\n  \"country\": \"BR\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\"\n  },\n  \"card\": {\n    \"card_id\": \"CV-e90078f7-e027-4ce4-84cb-534c877be33c\"\n  },\n  \"order_id\": \"5346523564\",\n  \"description\": \"Electronics purchase\",\n  \"notification_url\": \"https://webhook.site/notification\",\n  \"callback_url\": \"https://example.com/callback\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6305,\n  \"message\": \"string\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0b4ddee-b379-4cb0-a77c-3b332774d118",
+          "name": "Create a Secure Payment (with Card Data)",
+          "request": {
+            "name": "Create a Secure Payment (with Card Data)",
+            "description": {
+              "content": "Create a payment passing raw card data (number, expiration, CVV). Requires PCI DSS compliance.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "secure_payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<float>\",\n  \"currency\": \"<string>\",\n  \"payment_method_flow\": \"<string>\",\n  \"country\": \"<string>\",\n  \"payer\": {\n    \"name\": \"<string>\",\n    \"email\": \"<email>\",\n    \"document\": \"<string>\",\n    \"document_type\": \"<string>\",\n    \"user_reference\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"phone\": \"<string>\",\n    \"ip\": \"<ipv4>\"\n  },\n  \"order_id\": \"<string>\",\n  \"currency_to_charge\": \"<string>\",\n  \"payment_method_id\": \"<string>\",\n  \"original_order_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"notification_url\": \"<uri>\",\n  \"callback_url\": \"<uri>\",\n  \"scheduled_date\": \"<date>\",\n  \"card\": {\n    \"holder_name\": \"<string>\",\n    \"number\": \"<string>\",\n    \"cvv\": \"<string>\",\n    \"expiration_month\": \"<integer>\",\n    \"expiration_year\": \"<integer>\",\n    \"card_id\": \"<string>\",\n    \"token\": \"<string>\",\n    \"installments\": \"<integer>\",\n    \"installments_id\": \"<string>\",\n    \"descriptor\": \"<string>\",\n    \"capture\": \"<boolean>\",\n    \"encrypted_data\": \"<string>\"\n  },\n  \"wallet\": {\n    \"token\": \"<string>\"\n  },\n  \"device\": {\n    \"device_id\": \"<string>\",\n    \"ip\": \"<string>\"\n  },\n  \"additional_risk_data\": \"<object>\",\n  \"splits\": [\n    {\n      \"user_id\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"currency\": \"<string>\"\n    },\n    {\n      \"user_id\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"currency\": \"<string>\"\n    }\n  ],\n  \"remitter_user_id\": \"<string>\",\n  \"beneficiary_user_id\": \"<string>\",\n  \"subpurpose\": \"<string>\",\n  \"source_of_funds\": \"<string>\",\n  \"submerchant\": {\n    \"merchant_id\": \"<string>\",\n    \"mcc\": \"<string>\",\n    \"name\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e02be67-5bd3-4a65-9b96-b2a6f275802e",
+              "name": "Payment created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secure_payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 100,\n  \"currency\": \"USD\",\n  \"payment_method_id\": \"CARD\",\n  \"payment_method_flow\": \"DIRECT\",\n  \"country\": \"BR\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\"\n  },\n  \"card\": {\n    \"holder_name\": \"John Doe\",\n    \"number\": \"4111111111111111\",\n    \"cvv\": \"123\",\n    \"expiration_month\": 12,\n    \"expiration_year\": 2028\n  },\n  \"order_id\": \"5346523564\",\n  \"description\": \"Electronics purchase\",\n  \"notification_url\": \"https://webhook.site/notification\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PAY_GWLP5LSWQP9AXGBVPFZN\",\n  \"amount\": 3655.704394519168,\n  \"currency\": \"string\",\n  \"payment_method_id\": \"string\",\n  \"payment_method_type\": \"string\",\n  \"payment_method_flow\": \"string\",\n  \"country\": \"string\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\",\n    \"document_type\": \"<string>\",\n    \"user_reference\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"phone\": \"<string>\",\n    \"ip\": \"<ipv4>\"\n  },\n  \"order_id\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"PAID\",\n  \"status_code\": \"string\",\n  \"status_detail\": \"string\",\n  \"created_date\": \"1975-03-21T00:48:27.207Z\",\n  \"approved_date\": \"1966-04-16T22:38:36.231Z\",\n  \"redirect_url\": \"https://AWaobBSFGwsrZCDdAFy.kljBZFkemiHoOusyCVkNiS\",\n  \"card\": {\n    \"holder_name\": \"string\",\n    \"last4\": \"string\",\n    \"brand\": \"string\",\n    \"expiration_month\": 6399,\n    \"expiration_year\": 7395,\n    \"card_id\": \"string\"\n  },\n  \"three_dsecure\": {\n    \"eci\": \"string\",\n    \"cavv\": \"string\",\n    \"xid\": \"string\",\n    \"version\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c82b5a55-47ee-4cc4-ba7d-0a1d834499c8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "secure_payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 100,\n  \"currency\": \"USD\",\n  \"payment_method_id\": \"CARD\",\n  \"payment_method_flow\": \"DIRECT\",\n  \"country\": \"BR\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\"\n  },\n  \"card\": {\n    \"holder_name\": \"John Doe\",\n    \"number\": \"4111111111111111\",\n    \"cvv\": \"123\",\n    \"expiration_month\": 12,\n    \"expiration_year\": 2028\n  },\n  \"order_id\": \"5346523564\",\n  \"description\": \"Electronics purchase\",\n  \"notification_url\": \"https://webhook.site/notification\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6305,\n  \"message\": \"string\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d77d43d-180d-4c2b-90e2-f3794c262390",
+          "name": "Retrieve a Payment",
+          "request": {
+            "name": "Retrieve a Payment",
+            "description": {
+              "content": "Get the status and details of a specific payment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":payment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payment_id",
+                  "description": "(Required) Unique payment identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66c9ae31-2a7f-4285-a03c-b59f1d89cd7b",
+              "name": "Payment retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":payment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_id",
+                      "description": "(Required) Unique payment identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PAY_GWLP5LSWQP9AXGBVPFZN\",\n  \"amount\": 3655.704394519168,\n  \"currency\": \"string\",\n  \"payment_method_id\": \"string\",\n  \"payment_method_type\": \"string\",\n  \"payment_method_flow\": \"string\",\n  \"country\": \"string\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\",\n    \"document_type\": \"<string>\",\n    \"user_reference\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"phone\": \"<string>\",\n    \"ip\": \"<ipv4>\"\n  },\n  \"order_id\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"PAID\",\n  \"status_code\": \"string\",\n  \"status_detail\": \"string\",\n  \"created_date\": \"1975-03-21T00:48:27.207Z\",\n  \"approved_date\": \"1966-04-16T22:38:36.231Z\",\n  \"redirect_url\": \"https://AWaobBSFGwsrZCDdAFy.kljBZFkemiHoOusyCVkNiS\",\n  \"card\": {\n    \"holder_name\": \"string\",\n    \"last4\": \"string\",\n    \"brand\": \"string\",\n    \"expiration_month\": 6399,\n    \"expiration_year\": 7395,\n    \"card_id\": \"string\"\n  },\n  \"three_dsecure\": {\n    \"eci\": \"string\",\n    \"cavv\": \"string\",\n    \"xid\": \"string\",\n    \"version\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "812c04c3-8d90-4281-9cfa-8304b557ea91",
+              "name": "Payment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":payment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_id",
+                      "description": "(Required) Unique payment identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6305,\n  \"message\": \"string\",\n  \"param\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "882f8e2b-66bd-4f33-916e-72aed67d9bd0",
+          "name": "Retrieve a Payment by Order ID",
+          "request": {
+            "name": "Retrieve a Payment by Order ID",
+            "description": {
+              "content": "Retrieve payment details using the merchant's own order identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                "merchant_order_id",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) Merchant order identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8006cd39-a356-4bb3-a27c-200080e4e26f",
+              "name": "Payment retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "merchant_order_id",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) Merchant order identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PAY_GWLP5LSWQP9AXGBVPFZN\",\n  \"amount\": 3655.704394519168,\n  \"currency\": \"string\",\n  \"payment_method_id\": \"string\",\n  \"payment_method_type\": \"string\",\n  \"payment_method_flow\": \"string\",\n  \"country\": \"string\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\",\n    \"document_type\": \"<string>\",\n    \"user_reference\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"phone\": \"<string>\",\n    \"ip\": \"<ipv4>\"\n  },\n  \"order_id\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"PAID\",\n  \"status_code\": \"string\",\n  \"status_detail\": \"string\",\n  \"created_date\": \"1975-03-21T00:48:27.207Z\",\n  \"approved_date\": \"1966-04-16T22:38:36.231Z\",\n  \"redirect_url\": \"https://AWaobBSFGwsrZCDdAFy.kljBZFkemiHoOusyCVkNiS\",\n  \"card\": {\n    \"holder_name\": \"string\",\n    \"last4\": \"string\",\n    \"brand\": \"string\",\n    \"expiration_month\": 6399,\n    \"expiration_year\": 7395,\n    \"card_id\": \"string\"\n  },\n  \"three_dsecure\": {\n    \"eci\": \"string\",\n    \"cavv\": \"string\",\n    \"xid\": \"string\",\n    \"version\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c5a7be2-e51a-4a25-ad86-ee24ef2eede0",
+          "name": "Cancel a Payment",
+          "request": {
+            "name": "Cancel a Payment",
+            "description": {
+              "content": "Cancel a pending payment that has not yet been completed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                ":payment_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "payment_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e91089e8-079e-4a5e-b3b3-d6a8d5a5399a",
+              "name": "Payment cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    ":payment_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "payment_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"PAY_GWLP5LSWQP9AXGBVPFZN\",\n  \"amount\": 3655.704394519168,\n  \"currency\": \"string\",\n  \"payment_method_id\": \"string\",\n  \"payment_method_type\": \"string\",\n  \"payment_method_flow\": \"string\",\n  \"country\": \"string\",\n  \"payer\": {\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"document\": \"12345678901\",\n    \"document_type\": \"<string>\",\n    \"user_reference\": \"<string>\",\n    \"address\": {\n      \"street\": \"<string>\",\n      \"number\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zip_code\": \"<string>\",\n      \"country\": \"<string>\"\n    },\n    \"phone\": \"<string>\",\n    \"ip\": \"<ipv4>\"\n  },\n  \"order_id\": \"string\",\n  \"description\": \"string\",\n  \"status\": \"PAID\",\n  \"status_code\": \"string\",\n  \"status_detail\": \"string\",\n  \"created_date\": \"1975-03-21T00:48:27.207Z\",\n  \"approved_date\": \"1966-04-16T22:38:36.231Z\",\n  \"redirect_url\": \"https://AWaobBSFGwsrZCDdAFy.kljBZFkemiHoOusyCVkNiS\",\n  \"card\": {\n    \"holder_name\": \"string\",\n    \"last4\": \"string\",\n    \"brand\": \"string\",\n    \"expiration_month\": 6399,\n    \"expiration_year\": 7395,\n    \"card_id\": \"string\"\n  },\n  \"three_dsecure\": {\n    \"eci\": \"string\",\n    \"cavv\": \"string\",\n    \"xid\": \"string\",\n    \"version\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "096ecc96-2024-4e50-ba07-7b7c7f1d7d13",
+    "name": "dLocal Payins Accounts Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.\n\n\nContact Support:\n Name: dLocal Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

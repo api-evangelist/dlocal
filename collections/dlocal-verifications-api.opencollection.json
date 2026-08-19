@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "dLocal Payins Accounts Verifications API",
+    "version": "2.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Verifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.dlocal.com/verifications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate an identity verification request. Supports PAYOUT_HOLD and REMITTANCE verification types.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.dlocal.com/verifications/:verification_id",
+            "params": [
+              {
+                "name": "verification_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get status and details of a specific verification request."
+        },
+        {
+          "info": {
+            "name": "Update Verification Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.dlocal.com/verifications/:verification_id/status",
+            "params": [
+              {
+                "name": "verification_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the status of a verification (e.g., approve or reject during compliance workflows)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

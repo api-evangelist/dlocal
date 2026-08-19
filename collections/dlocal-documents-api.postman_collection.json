@@ -1,0 +1,266 @@
+{
+  "item": [
+    {
+      "id": "6dcbfb52-6044-4259-a34f-80a043a78d5d",
+      "name": "Documents",
+      "description": {
+        "content": "Document upload and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "58163944-a866-42b1-8ae9-3f0c66549ddc",
+          "name": "Upload Verification Document",
+          "request": {
+            "name": "Upload Verification Document",
+            "description": {
+              "content": "Upload a document for an active verification request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verifications",
+                ":verification_id",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "verification_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"filename\": \"<string>\",\n  \"content\": \"<string>\",\n  \"side\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0929960-008d-4acf-8288-76846f05b7c8",
+              "name": "Document uploaded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verifications",
+                    ":verification_id",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "verification_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"ID\",\n  \"side\": \"FRONT\",\n  \"filename\": \"id_front.jpg\",\n  \"content\": \"base64_encoded_image_content\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"type\": \"string\",\n  \"side\": \"string\",\n  \"filename\": \"string\",\n  \"status\": \"ACCEPTED\",\n  \"rejection_reason\": \"string\",\n  \"uploaded_date\": \"1977-11-10T05:05:46.788Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b77a2f6-0e6e-48a8-88d0-0782c4a33335",
+          "name": "List Verification Documents",
+          "request": {
+            "name": "List Verification Documents",
+            "description": {
+              "content": "List all documents submitted for a verification request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "verifications",
+                ":verification_id",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "verification_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "18d387eb-8698-460a-bc54-d63f3fb42aee",
+              "name": "Documents list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "verifications",
+                    ":verification_id",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "verification_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documents\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"side\": \"string\",\n      \"filename\": \"string\",\n      \"status\": \"PENDING\",\n      \"rejection_reason\": \"string\",\n      \"uploaded_date\": \"1953-10-01T19:41:01.324Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"side\": \"string\",\n      \"filename\": \"string\",\n      \"status\": \"REJECTED\",\n      \"rejection_reason\": \"string\",\n      \"uploaded_date\": \"2011-11-13T16:55:28.142Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ecd81fe1-4190-4197-984a-4aef531d5c74",
+    "name": "dLocal Payins Accounts Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.\n\n\nContact Support:\n Name: dLocal Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

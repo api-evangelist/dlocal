@@ -1,0 +1,139 @@
+{
+  "item": [
+    {
+      "id": "05f20894-64bb-4870-b4d0-0afd921a175a",
+      "name": "Balance",
+      "description": {
+        "content": "Query account balances",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3fca9c35-494c-4eca-8e7a-d80e2ff52330",
+          "name": "Get Account Balance",
+          "request": {
+            "name": "Get Account Balance",
+            "description": {
+              "content": "Retrieve the current balance for the merchant account across currencies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "balances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Filter by specific currency"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1a391a6-2da6-41a2-bf54-0f68179ac06e",
+              "name": "Balance retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "balances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "USD"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"balances\": [\n    {\n      \"currency\": \"string\",\n      \"amount\": 8904.63840996579,\n      \"available_amount\": 7505.4517249744,\n      \"pending_amount\": 8234.590995742308\n    },\n    {\n      \"currency\": \"string\",\n      \"amount\": 4156.690720811202,\n      \"available_amount\": 5912.901684214772,\n      \"pending_amount\": 3899.5763290043897\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1c058d6e-85df-4a14-8917-c2deeb2f8dcb",
+    "name": "dLocal Payins Accounts Balance API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.\n\n\nContact Support:\n Name: dLocal Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,256 @@
+{
+  "item": [
+    {
+      "id": "e2a3254c-ea06-4507-9d08-3a0cb7ef7d6e",
+      "name": "Chargebacks",
+      "description": {
+        "content": "Manage chargeback disputes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1c433e01-5188-4689-beef-2cfe4462c8f2",
+          "name": "Retrieve a Chargeback",
+          "request": {
+            "name": "Retrieve a Chargeback",
+            "description": {
+              "content": "Get details of a specific chargeback.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chargebacks",
+                ":chargeback_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chargeback_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bdf04539-5085-4985-a120-21d6ddcee33c",
+              "name": "Chargeback retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chargebacks",
+                    ":chargeback_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeback_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"payment_id\": \"string\",\n  \"created_date\": \"1968-04-22T10:18:16.901Z\",\n  \"currency\": \"string\",\n  \"amount\": 5085.380850790227,\n  \"status\": \"string\",\n  \"reason_code\": \"string\",\n  \"reason_description\": \"string\",\n  \"chargeback_stage\": \"string\",\n  \"arn\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56c87424-2080-4037-9ab5-67ce8dfb2ddc",
+          "name": "Upload Dispute Documentation",
+          "request": {
+            "name": "Upload Dispute Documentation",
+            "description": {
+              "content": "Submit a PDF file (max 1MB, base64-encoded) to dispute a chargeback.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "chargebacks",
+                "dispute",
+                ":chargeback_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "chargeback_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dedab203-659b-463c-847f-25677701ce07",
+              "name": "Dispute uploaded successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chargebacks",
+                    "dispute",
+                    ":chargeback_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "chargeback_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"chargeback_dispute.pdf\",\n  \"content\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.dlocal.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "799c9153-9411-430a-b216-942479cf185d",
+    "name": "dLocal Payins Accounts Chargebacks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.\n\n\nContact Support:\n Name: dLocal Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
