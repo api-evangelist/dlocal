@@ -90,6 +90,8 @@ apis:
   humanURL: https://docs.dlocal.com/reference/api
   baseURL: https://api.dlocal.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -106,6 +108,8 @@ apis:
   humanURL: https://docs.dlocal.com/reference/api
   baseURL: https://api.dlocal.com
   tags:
+  - Balances
+  tags_raw:
   - Balance
   properties:
   - type: OpenAPI
@@ -298,6 +302,8 @@ apis:
   humanURL: https://docs.dlocal.com/reference/api
   baseURL: https://api.dlocal.com
   tags:
+  - Verification
+  tags_raw:
   - Verifications
   properties:
   - type: OpenAPI
