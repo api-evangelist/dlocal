@@ -314,7 +314,7 @@ apis:
   humanURL: https://docs.dlocal.com/reference/api
   baseURL: https://api.dlocal.com
   tags:
-  - Verifications
+  - Verification
   tags_raw:
   - Verifications
   properties:
