@@ -35,6 +35,22 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "dlocal-accounts-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-balance-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-bank-accounts-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-chargebacks-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-currency-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-documents-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-kyc-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-payment-methods-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-payments-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-payouts-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-refunds-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-tokens-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-transfers-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "dlocal-verifications-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

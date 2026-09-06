@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: dLocal Payins Accounts Chargebacks API
   description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.

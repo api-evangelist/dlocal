@@ -327,6 +327,98 @@ apis:
   - type: PostmanCollection
     url: https://docs.dlocal.com/reference/postman-api-collection
 common:
+  - type: Arazzo
+    url: arazzo/dlocal-authorize-and-capture-payment-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-cancel-pending-payment-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-create-and-resolve-kyc-verification-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-create-payment-and-confirm-status-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-enroll-and-charge-recurring-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-fx-preview-and-pay-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-hold-and-release-payout-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-list-payment-refunds-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-manage-account-bank-accounts-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-onboard-submerchant-account-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-quote-and-request-payout-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-refund-payment-and-confirm-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-settle-transfer-between-accounts-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-simulate-and-inspect-chargeback-workflow.yml
+  - type: Arazzo
+    url: arazzo/dlocal-tokenize-card-and-charge-workflow.yml
+  - type: Portal
+    url: https://dlocal.com/
+  - type: APIReference
+    url: https://docs.dlocal.com/reference/api
+  - type: Compliance
+    url: https://docs.dlocal.com/docs/pci-compliance
+  - type: SDKs
+    url: https://docs.dlocal.com/reference/postman-api-collection
+  - type: Signup
+    url: https://dlocal.com/contact-sales/
+  - type: Resources
+    url: https://dlocal.com/careers/
+  - type: Newsletter
+    url: https://dlocal.com/press-releases/
+  - type: Resources
+    url: https://investor.dlocal.com/
+  - type: TermsOfService
+    url: https://dlocal.com/terms-and-conditions/
+  - type: PrivacyPolicy
+    url: https://dlocal.com/privacy-policy/
+  - type: Support
+    url: http://intercom.help/end-user-team-faqs/en
+  - type: GitHubOrganization
+    url: https://github.com/dlocal
+  - type: SDKs
+    url: https://github.com/dlocal/dlocal-direct-ios-sdk
+  - type: SDKs
+    url: https://github.com/dlocal/dlocal-direct-android-sdk
+  - type: SDKs
+    url: https://github.com/dlocal/mobile-checkout-sdk-ios
+  - type: SDKs
+    url: https://github.com/dlocal/mobile-checkout-sdk-android
+  - type: SDKs
+    url: https://github.com/dlocal/web-drop-in-sdk-android
+  - type: SDKs
+    url: https://github.com/dlocal/data-collector-sdk-ios
+  - type: SDKs
+    url: https://github.com/dlocal/data-collector-sdk-android
+  - type: SDKs
+    url: https://github.com/dlocal/dlocal-data-collector-capacitor-plugin
+  - type: SDKs
+    url: https://github.com/dlocal/dlocal-direct-js-native-integration
+  - type: CodeExamples
+    url: https://github.com/dlocal/smart-fields-examples
+  - type: CodeExamples
+    url: https://github.com/dlocal/Starter-Code-Examples
+  - type: SDKs
+    url: https://docs.dlocal.com/reference/including-dlocaljs
+  - type: Troubleshooting
+    url: https://docs.dlocal.com/reference/troubleshooting-integration
+  - type: Troubleshooting
+    url: https://docs.dlocal.com/reference/troubleshooting-signature
+  - type: ErrorCodes
+    url: https://docs.dlocal.com/reference/http-errors-payments
+  - type: ErrorCodes
+    url: https://docs.dlocal.com/reference/http-errors-refunds
+  - type: ErrorCodes
+    url: https://docs.dlocal.com/reference/http-errors-cards
+  - type: ErrorCodes
+    url: https://docs.dlocal.com/reference/error-codes-payouts-v3
+  - type: SpectralRules
+    url: rules/dlocal-rules.yml
   - type: AgenticAccess
     url: agentic-access/dlocal-agentic-access.yml
   - type: DomainSecurity

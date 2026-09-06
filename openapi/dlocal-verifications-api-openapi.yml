@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: dLocal Payins Accounts Verifications API
   description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
@@ -124,6 +124,35 @@ paths:
                 $ref: '#/components/schemas/Verification'
 components:
   schemas:
+    CreateVerificationRequest:
+      type: object
+      required:
+      - type
+      - order_id
+      - payer
+      properties:
+        type:
+          type: string
+          enum:
+          - PAYOUT_HOLD
+          - REMITTANCE
+          description: Type of verification workflow
+        order_id:
+          type: string
+          description: Merchant-assigned unique identifier
+        payer:
+          $ref: '#/components/schemas/Payer'
+        notification_url:
+          type: string
+          format: uri
+          description: Webhook URL for verification status notifications
+        callback_url:
+          type: string
+          format: uri
+          description: URL to redirect user after verification completion
+        metadata:
+          type: object
+          description: Additional metadata for the verification
     DocumentRecord:
       type: object
       properties:
@@ -146,20 +175,30 @@ components:
         uploaded_date:
           type: string
           format: date-time
-    Address:
+    Payer:
       type: object
+      required:
+      - name
+      - email
       properties:
-        street:
+        name:
           type: string
-        number:
+          example: John Doe
+        email:
           type: string
-        city:
+          format: email
+        document:
           type: string
-        state:
+          description: National ID or tax identifier
+        document_type:
           type: string
-        zip_code:
-          type: string
+          description: Document type code (CPF, CNPJ, DNI, etc.)
         country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
           type: string
     Verification:
       type: object
@@ -205,60 +244,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentRecord'
-    CreateVerificationRequest:
-      type: object
-      required:
-      - type
-      - order_id
-      - payer
-      properties:
-        type:
-          type: string
-          enum:
-          - PAYOUT_HOLD
-          - REMITTANCE
-          description: Type of verification workflow
-        order_id:
-          type: string
-          description: Merchant-assigned unique identifier
-        payer:
-          $ref: '#/components/schemas/Payer'
-        notification_url:
-          type: string
-          format: uri
-          description: Webhook URL for verification status notifications
-        callback_url:
-          type: string
-          format: uri
-          description: URL to redirect user after verification completion
-        metadata:
-          type: object
-          description: Additional metadata for the verification
-    Payer:
-      type: object
-      required:
-      - name
-      - email
-      properties:
-        name:
-          type: string
-          example: John Doe
-        email:
-          type: string
-          format: email
-        document:
-          type: string
-          description: National ID or tax identifier
-        document_type:
-          type: string
-          description: Document type code (CPF, CNPJ, DNI, etc.)
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-        address:
-          $ref: '#/components/schemas/Address'
-        phone:
-          type: string
     Error:
       type: object
       properties:
@@ -267,6 +252,21 @@ components:
         message:
           type: string
         param:
+          type: string
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        number:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+        country:
           type: string
   securitySchemes:
     HmacAuth:
