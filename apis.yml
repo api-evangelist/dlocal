@@ -35,6 +35,17 @@ specificationVersion: '0.23'
 tags:
   - Payments
   - Emerging Markets
+  - Pay-In
+  - Payouts
+  - Fintech
+  - Latin America
+  - Africa
+  - Asia
+  - Local Payment Methods
+  - Payment Processing
+tags_raw:
+  - Payments
+  - Emerging Markets
   - Payins
   - Payouts
   - Fintech
@@ -70,6 +81,11 @@ apis:
   humanURL: https://docs.dlocal.com/reference/api
   baseURL: https://api.dlocal.com
   tags:
+  - Platform
+  - Marketplace
+  - KYC
+  - Onboarding
+  tags_raw:
   - Platforms
   - Marketplaces
   - KYC
