@@ -1,14 +1,11 @@
 openapi: 3.2.0
 info:
-  title: dLocal Payins Accounts API
-  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
-
-    '
-  version: '2.1'
+  title: dLocal Platforms Accounts API
+  description: Complete solution for marketplaces and platforms with automated account onboarding, KYC information handling, bank account management, transfer operations, and account status and balance queries.
+  version: '1.0'
   contact:
     name: dLocal Developer Support
     url: https://docs.dlocal.com/
-  termsOfService: https://www.dlocal.com/terms-of-service/
 servers:
 - url: https://api.dlocal.com
   description: Production
@@ -100,20 +97,6 @@ paths:
                       $ref: '#/components/schemas/Balance'
 components:
   schemas:
-    Balance:
-      type: object
-      properties:
-        currency:
-          type: string
-        amount:
-          type: number
-          format: float
-        available_amount:
-          type: number
-          format: float
-        pending_amount:
-          type: number
-          format: float
     Account:
       type: object
       properties:
@@ -147,6 +130,21 @@ components:
         created_date:
           type: string
           format: date-time
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        number:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+        country:
+          type: string
     CreateAccountRequest:
       type: object
       required:
@@ -177,6 +175,20 @@ components:
           $ref: '#/components/schemas/Address'
         phone:
           type: string
+    Balance:
+      type: object
+      properties:
+        currency:
+          type: string
+        amount:
+          type: number
+          format: float
+        available_amount:
+          type: number
+          format: float
+        pending_amount:
+          type: number
+          format: float
     Error:
       type: object
       properties:
@@ -186,26 +198,11 @@ components:
           type: string
         param:
           type: string
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-        number:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip_code:
-          type: string
-        country:
-          type: string
   securitySchemes:
     HmacAuth:
       type: apiKey
       in: header
       name: Authorization
-      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}"
 
         '

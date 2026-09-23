@@ -1,14 +1,11 @@
 openapi: 3.2.0
 info:
-  title: dLocal Payins Accounts Verifications API
-  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
-
-    '
-  version: '2.1'
+  title: dLocal Verification Verifications API
+  description: Identity verification and document management API supporting verification creation and retrieval, document management, and status updates for compliance workflows across emerging markets.
+  version: '1.0'
   contact:
     name: dLocal Developer Support
     url: https://docs.dlocal.com/
-  termsOfService: https://www.dlocal.com/terms-of-service/
 servers:
 - url: https://api.dlocal.com
   description: Production
@@ -23,9 +20,7 @@ paths:
   /verifications:
     post:
       summary: Create a Verification
-      description: 'Initiate an identity verification request. Supports PAYOUT_HOLD and REMITTANCE verification types.
-
-        '
+      description: Initiate an identity verification request. Supports PAYOUT_HOLD and REMITTANCE verification types.
       operationId: createVerification
       tags:
       - Verifications
@@ -124,6 +119,43 @@ paths:
                 $ref: '#/components/schemas/Verification'
 components:
   schemas:
+    DocumentRecord:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        side:
+          type: string
+        filename:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - ACCEPTED
+          - REJECTED
+        rejection_reason:
+          type: string
+        uploaded_date:
+          type: string
+          format: date-time
+    Address:
+      type: object
+      properties:
+        street:
+          type: string
+        number:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+        country:
+          type: string
     CreateVerificationRequest:
       type: object
       required:
@@ -153,28 +185,6 @@ components:
         metadata:
           type: object
           description: Additional metadata for the verification
-    DocumentRecord:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-        side:
-          type: string
-        filename:
-          type: string
-        status:
-          type: string
-          enum:
-          - PENDING
-          - ACCEPTED
-          - REJECTED
-        rejection_reason:
-          type: string
-        uploaded_date:
-          type: string
-          format: date-time
     Payer:
       type: object
       required:
@@ -199,6 +209,15 @@ components:
         address:
           $ref: '#/components/schemas/Address'
         phone:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        param:
           type: string
     Verification:
       type: object
@@ -244,35 +263,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentRecord'
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        param:
-          type: string
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-        number:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip_code:
-          type: string
-        country:
-          type: string
   securitySchemes:
     HmacAuth:
       type: apiKey
       in: header
       name: Authorization
-      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}"
 
         '

@@ -1,14 +1,11 @@
 openapi: 3.2.0
 info:
-  title: dLocal Payins Accounts Documents API
-  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
-
-    '
-  version: '2.1'
+  title: dLocal Verification Documents API
+  description: Identity verification and document management API supporting verification creation and retrieval, document management, and status updates for compliance workflows across emerging markets.
+  version: '1.0'
   contact:
     name: dLocal Developer Support
     url: https://docs.dlocal.com/
-  termsOfService: https://www.dlocal.com/terms-of-service/
 servers:
 - url: https://api.dlocal.com
   description: Production
@@ -134,6 +131,6 @@ components:
       type: apiKey
       in: header
       name: Authorization
-      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
+      description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}"
 
         '

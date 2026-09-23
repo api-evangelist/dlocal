@@ -1,14 +1,11 @@
 openapi: 3.2.0
 info:
-  title: dLocal Payins Accounts Payouts API
-  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
-
-    '
-  version: '2.1'
+  title: dLocal Payouts API
+  description: Distribute funds globally with multi-currency support and local compliance across 60+ emerging market countries. Includes payout submission and retrieval, balance checking, quote generation for currency exchange, payout cancellation and release, and account-specific operations.
+  version: '3.0'
   contact:
     name: dLocal Developer Support
     url: https://docs.dlocal.com/
-  termsOfService: https://www.dlocal.com/terms-of-service/
 servers:
 - url: https://api.dlocal.com
   description: Production
@@ -23,9 +20,7 @@ paths:
   /payouts:
     post:
       summary: Submit a Payout
-      description: 'Submit a payout to a recipient in an emerging market country. Supports bank transfers, mobile money, and other local disbursement methods.
-
-        '
+      description: Submit a payout to a recipient in an emerging market country. Supports bank transfers, mobile money, and other local disbursement methods.
       operationId: createPayout
       tags:
       - Payouts
@@ -182,41 +177,21 @@ components:
           description: CLABE number for Mexico
         iban:
           type: string
-    MobileWallet:
+    Address:
       type: object
       properties:
-        phone:
+        street:
           type: string
-        provider:
+        number:
           type: string
-    Beneficiary:
-      type: object
-      required:
-      - name
-      - document
-      properties:
-        name:
+        city:
           type: string
-          example: Maria Silva
-        lastname:
+        state:
           type: string
-        document:
+        zip_code:
           type: string
-          description: National ID or tax document
-          example: '12345678901'
-        document_type:
+        country:
           type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        address:
-          $ref: '#/components/schemas/Address'
-        bank_account:
-          $ref: '#/components/schemas/BankAccount'
-        mobile_wallet:
-          $ref: '#/components/schemas/MobileWallet'
     Payout:
       type: object
       properties:
@@ -258,6 +233,50 @@ components:
           type: string
           format: date-time
         transaction_id:
+          type: string
+    MobileWallet:
+      type: object
+      properties:
+        phone:
+          type: string
+        provider:
+          type: string
+    Beneficiary:
+      type: object
+      required:
+      - name
+      - document
+      properties:
+        name:
+          type: string
+          example: Maria Silva
+        lastname:
+          type: string
+        document:
+          type: string
+          description: National ID or tax document
+          example: '12345678901'
+        document_type:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        bank_account:
+          $ref: '#/components/schemas/BankAccount'
+        mobile_wallet:
+          $ref: '#/components/schemas/MobileWallet'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        param:
           type: string
     CreatePayoutRequest:
       type: object
@@ -317,30 +336,6 @@ components:
         fx_quote_id:
           type: string
           description: FX quote ID to lock in exchange rate
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        param:
-          type: string
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-        number:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip_code:
-          type: string
-        country:
-          type: string
   securitySchemes:
     HmacAuth:
       type: apiKey

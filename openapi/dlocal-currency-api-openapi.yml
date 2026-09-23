@@ -1,14 +1,11 @@
 openapi: 3.2.0
 info:
-  title: dLocal Payins Accounts Currency API
-  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
-
-    '
-  version: '2.1'
+  title: Dlocal Currency API
   contact:
     name: dLocal Developer Support
     url: https://docs.dlocal.com/
-  termsOfService: https://www.dlocal.com/terms-of-service/
+  version: '1.0'
+  description: 'Operations tagged Currency across 2 of this provider''s published API definitions: dlocal-payins-openapi.yml, dlocal-payouts-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.dlocal.com
   description: Production
@@ -64,12 +61,15 @@ paths:
                   valid_until:
                     type: string
                     format: date-time
+    servers:
+    - url: https://api.dlocal.com
+      description: Production
+    - url: https://sandbox.dlocal.com
+      description: Sandbox
   /fx-rates/quotes:
     post:
       summary: Generate FX Quote
-      description: 'Generate a currency exchange quote for a payout. The quote locks in a rate for a short period.
-
-        '
+      description: Generate a currency exchange quote for a payout. The quote locks in a rate for a short period.
       operationId: createFxQuote
       tags:
       - Currency
@@ -105,6 +105,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FxQuote'
+    servers:
+    - url: https://api.dlocal.com
+      description: Production
+    - url: https://sandbox.dlocal.com
+      description: Sandbox
 components:
   schemas:
     FxQuote:
@@ -138,3 +143,6 @@ components:
       description: 'HMAC-SHA256 signature. Format: "V2-HMAC-SHA256, Signature: {hmac_value}" Signature = HMAC-SHA256(X-Login + X-Date + RequestBody, SecretKey)
 
         '
+x-refined-from:
+- dlocal-payins-openapi.yml
+- dlocal-payouts-openapi.yml

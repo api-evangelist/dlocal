@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
-  title: dLocal Payins Accounts Payment Methods API
-  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
-
-    '
+  title: dLocal Payins Payment Methods API
+  description: Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
   version: '2.1'
   contact:
     name: dLocal Developer Support

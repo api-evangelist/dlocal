@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
-  title: dLocal Payins Accounts Refunds API
-  description: 'Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
-
-    '
+  title: dLocal Payins Refunds API
+  description: Accept payments from customers in emerging markets using 1,000+ local payment methods including cards, bank transfers, cash, mobile money, eWallets, and Pix. Supports 3D Secure, installments, recurring payments, merchant-initiated transactions, and authorization/capture flows.
   version: '2.1'
   contact:
     name: dLocal Developer Support
@@ -23,9 +21,7 @@ paths:
   /refunds:
     post:
       summary: Create a Refund
-      description: 'Reverse a card payment or initiate a bank transfer for alternative payment methods.
-
-        '
+      description: Reverse a card payment or initiate a bank transfer for alternative payment methods.
       operationId: createRefund
       tags:
       - Refunds
@@ -69,35 +65,6 @@ paths:
                 $ref: '#/components/schemas/Refund'
 components:
   schemas:
-    CreateRefundRequest:
-      type: object
-      required:
-      - payment_id
-      - amount
-      - currency
-      properties:
-        payment_id:
-          type: string
-        amount:
-          type: number
-          format: float
-        currency:
-          type: string
-        notification_url:
-          type: string
-          format: uri
-        order_refund_id:
-          type: string
-        beneficiary_name:
-          type: string
-        bank:
-          type: string
-        bank_account:
-          type: string
-        bank_account_type:
-          type: string
-        bank_branch:
-          type: string
     Refund:
       type: object
       properties:
@@ -132,6 +99,35 @@ components:
         transaction_id:
           type: string
         authorization_code:
+          type: string
+    CreateRefundRequest:
+      type: object
+      required:
+      - payment_id
+      - amount
+      - currency
+      properties:
+        payment_id:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        notification_url:
+          type: string
+          format: uri
+        order_refund_id:
+          type: string
+        beneficiary_name:
+          type: string
+        bank:
+          type: string
+        bank_account:
+          type: string
+        bank_account_type:
+          type: string
+        bank_branch:
           type: string
   securitySchemes:
     HmacAuth:
