@@ -97,6 +97,15 @@ paths:
                       $ref: '#/components/schemas/Balance'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        param:
+          type: string
     Account:
       type: object
       properties:
@@ -130,21 +139,6 @@ components:
         created_date:
           type: string
           format: date-time
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-        number:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip_code:
-          type: string
-        country:
-          type: string
     CreateAccountRequest:
       type: object
       required:
@@ -189,14 +183,20 @@ components:
         pending_amount:
           type: number
           format: float
-    Error:
+    Address:
       type: object
       properties:
-        code:
-          type: integer
-        message:
+        street:
           type: string
-        param:
+        number:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zip_code:
+          type: string
+        country:
           type: string
   securitySchemes:
     HmacAuth:
