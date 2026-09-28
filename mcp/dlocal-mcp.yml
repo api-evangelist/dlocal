@@ -16,6 +16,9 @@ deployment:
 tools_count: 1
 tools:
 - name: dLocal_docs_overview
-  description: ''
+  description: Search dLocal documentation and return the most relevant snippets for a natural-language
+    query.
 tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
 authorship: provider
+descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
+  --descriptions, 2026-09-28
