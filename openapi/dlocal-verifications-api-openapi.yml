@@ -119,15 +119,57 @@ paths:
                 $ref: '#/components/schemas/Verification'
 components:
   schemas:
-    Error:
+    CreateVerificationRequest:
+      type: object
+      required:
+      - type
+      - order_id
+      - payer
+      properties:
+        type:
+          type: string
+          enum:
+          - PAYOUT_HOLD
+          - REMITTANCE
+          description: Type of verification workflow
+        order_id:
+          type: string
+          description: Merchant-assigned unique identifier
+        payer:
+          $ref: '#/components/schemas/Payer'
+        notification_url:
+          type: string
+          format: uri
+          description: Webhook URL for verification status notifications
+        callback_url:
+          type: string
+          format: uri
+          description: URL to redirect user after verification completion
+        metadata:
+          type: object
+          description: Additional metadata for the verification
+    DocumentRecord:
       type: object
       properties:
-        code:
-          type: integer
-        message:
+        id:
           type: string
-        param:
+        type:
           type: string
+        side:
+          type: string
+        filename:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - ACCEPTED
+          - REJECTED
+        rejection_reason:
+          type: string
+        uploaded_date:
+          type: string
+          format: date-time
     Payer:
       type: object
       required:
@@ -153,28 +195,6 @@ components:
           $ref: '#/components/schemas/Address'
         phone:
           type: string
-    DocumentRecord:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-        side:
-          type: string
-        filename:
-          type: string
-        status:
-          type: string
-          enum:
-          - PENDING
-          - ACCEPTED
-          - REJECTED
-        rejection_reason:
-          type: string
-        uploaded_date:
-          type: string
-          format: date-time
     Verification:
       type: object
       properties:
@@ -219,35 +239,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DocumentRecord'
-    CreateVerificationRequest:
-      type: object
-      required:
-      - type
-      - order_id
-      - payer
-      properties:
-        type:
-          type: string
-          enum:
-          - PAYOUT_HOLD
-          - REMITTANCE
-          description: Type of verification workflow
-        order_id:
-          type: string
-          description: Merchant-assigned unique identifier
-        payer:
-          $ref: '#/components/schemas/Payer'
-        notification_url:
-          type: string
-          format: uri
-          description: Webhook URL for verification status notifications
-        callback_url:
-          type: string
-          format: uri
-          description: URL to redirect user after verification completion
-        metadata:
-          type: object
-          description: Additional metadata for the verification
     Address:
       type: object
       properties:
@@ -262,6 +253,15 @@ components:
         zip_code:
           type: string
         country:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        param:
           type: string
   securitySchemes:
     HmacAuth:

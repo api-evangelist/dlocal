@@ -97,15 +97,6 @@ paths:
                       $ref: '#/components/schemas/Balance'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        param:
-          type: string
     Account:
       type: object
       properties:
@@ -197,6 +188,15 @@ components:
         zip_code:
           type: string
         country:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        param:
           type: string
   securitySchemes:
     HmacAuth:

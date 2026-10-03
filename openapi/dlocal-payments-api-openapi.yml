@@ -188,141 +188,6 @@ paths:
                 $ref: '#/components/schemas/Payment'
 components:
   schemas:
-    CardOutput:
-      type: object
-      properties:
-        holder_name:
-          type: string
-        last4:
-          type: string
-        brand:
-          type: string
-        expiration_month:
-          type: integer
-        expiration_year:
-          type: integer
-        card_id:
-          type: string
-    CardInput:
-      type: object
-      properties:
-        holder_name:
-          type: string
-        number:
-          type: string
-          description: Card number (PAN) — only for secure_payments endpoint
-        cvv:
-          type: string
-        expiration_month:
-          type: integer
-        expiration_year:
-          type: integer
-        card_id:
-          type: string
-          description: Token from a previous tokenization
-        token:
-          type: string
-        installments:
-          type: integer
-        installments_id:
-          type: string
-        descriptor:
-          type: string
-        capture:
-          type: boolean
-        encrypted_data:
-          type: string
-          description: JWE-encrypted card data
-    Payment:
-      type: object
-      properties:
-        id:
-          type: string
-          description: dLocal payment identifier
-          example: PAY_GWLP5LSWQP9AXGBVPFZN
-        amount:
-          type: number
-          format: float
-        currency:
-          type: string
-        payment_method_id:
-          type: string
-        payment_method_type:
-          type: string
-        payment_method_flow:
-          type: string
-        country:
-          type: string
-        payer:
-          $ref: '#/components/schemas/Payer'
-        order_id:
-          type: string
-        description:
-          type: string
-        status:
-          type: string
-          enum:
-          - PENDING
-          - PAID
-          - REJECTED
-          - CANCELLED
-          - EXPIRED
-          - AUTHORIZED
-          description: Current payment status
-        status_code:
-          type: string
-        status_detail:
-          type: string
-        created_date:
-          type: string
-          format: date-time
-        approved_date:
-          type: string
-          format: date-time
-        redirect_url:
-          type: string
-          format: uri
-          description: URL to redirect user for REDIRECT flow payments
-        card:
-          $ref: '#/components/schemas/CardOutput'
-        three_dsecure:
-          type: object
-          properties:
-            eci:
-              type: string
-            cavv:
-              type: string
-            xid:
-              type: string
-            version:
-              type: string
-    DeviceInfo:
-      type: object
-      properties:
-        device_id:
-          type: string
-        ip:
-          type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        param:
-          type: string
-    Submerchant:
-      type: object
-      properties:
-        merchant_id:
-          type: string
-        mcc:
-          type: string
-        name:
-          type: string
-        address:
-          $ref: '#/components/schemas/Address'
     CreatePaymentRequest:
       type: object
       required:
@@ -407,15 +272,129 @@ components:
           type: string
         submerchant:
           $ref: '#/components/schemas/Submerchant'
-    Split:
+    CardOutput:
       type: object
       properties:
-        user_id:
+        holder_name:
           type: string
+        last4:
+          type: string
+        brand:
+          type: string
+        expiration_month:
+          type: integer
+        expiration_year:
+          type: integer
+        card_id:
+          type: string
+    CardInput:
+      type: object
+      properties:
+        holder_name:
+          type: string
+        number:
+          type: string
+          description: Card number (PAN) — only for secure_payments endpoint
+        cvv:
+          type: string
+        expiration_month:
+          type: integer
+        expiration_year:
+          type: integer
+        card_id:
+          type: string
+          description: Token from a previous tokenization
+        token:
+          type: string
+        installments:
+          type: integer
+        installments_id:
+          type: string
+        descriptor:
+          type: string
+        capture:
+          type: boolean
+        encrypted_data:
+          type: string
+          description: JWE-encrypted card data
+    Submerchant:
+      type: object
+      properties:
+        merchant_id:
+          type: string
+        mcc:
+          type: string
+        name:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: dLocal payment identifier
+          example: PAY_GWLP5LSWQP9AXGBVPFZN
         amount:
           type: number
           format: float
         currency:
+          type: string
+        payment_method_id:
+          type: string
+        payment_method_type:
+          type: string
+        payment_method_flow:
+          type: string
+        country:
+          type: string
+        payer:
+          $ref: '#/components/schemas/Payer'
+        order_id:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - PAID
+          - REJECTED
+          - CANCELLED
+          - EXPIRED
+          - AUTHORIZED
+          description: Current payment status
+        status_code:
+          type: string
+        status_detail:
+          type: string
+        created_date:
+          type: string
+          format: date-time
+        approved_date:
+          type: string
+          format: date-time
+        redirect_url:
+          type: string
+          format: uri
+          description: URL to redirect user for REDIRECT flow payments
+        card:
+          $ref: '#/components/schemas/CardOutput'
+        three_dsecure:
+          type: object
+          properties:
+            eci:
+              type: string
+            cavv:
+              type: string
+            xid:
+              type: string
+            version:
+              type: string
+    WalletInput:
+      type: object
+      properties:
+        token:
           type: string
     Payer:
       type: object
@@ -445,11 +424,6 @@ components:
         ip:
           type: string
           format: ipv4
-    WalletInput:
-      type: object
-      properties:
-        token:
-          type: string
     Address:
       type: object
       properties:
@@ -464,6 +438,32 @@ components:
         zip_code:
           type: string
         country:
+          type: string
+    DeviceInfo:
+      type: object
+      properties:
+        device_id:
+          type: string
+        ip:
+          type: string
+    Split:
+      type: object
+      properties:
+        user_id:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        param:
           type: string
   securitySchemes:
     HmacAuth:

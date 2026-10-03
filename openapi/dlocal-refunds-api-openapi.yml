@@ -65,6 +65,35 @@ paths:
                 $ref: '#/components/schemas/Refund'
 components:
   schemas:
+    CreateRefundRequest:
+      type: object
+      required:
+      - payment_id
+      - amount
+      - currency
+      properties:
+        payment_id:
+          type: string
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        notification_url:
+          type: string
+          format: uri
+        order_refund_id:
+          type: string
+        beneficiary_name:
+          type: string
+        bank:
+          type: string
+        bank_account:
+          type: string
+        bank_account_type:
+          type: string
+        bank_branch:
+          type: string
     Refund:
       type: object
       properties:
@@ -99,35 +128,6 @@ components:
         transaction_id:
           type: string
         authorization_code:
-          type: string
-    CreateRefundRequest:
-      type: object
-      required:
-      - payment_id
-      - amount
-      - currency
-      properties:
-        payment_id:
-          type: string
-        amount:
-          type: number
-          format: float
-        currency:
-          type: string
-        notification_url:
-          type: string
-          format: uri
-        order_refund_id:
-          type: string
-        beneficiary_name:
-          type: string
-        bank:
-          type: string
-        bank_account:
-          type: string
-        bank_account_type:
-          type: string
-        bank_branch:
           type: string
   securitySchemes:
     HmacAuth:

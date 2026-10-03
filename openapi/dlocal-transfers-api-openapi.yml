@@ -59,6 +59,25 @@ paths:
                 $ref: '#/components/schemas/Transfer'
 components:
   schemas:
+    CreateTransferRequest:
+      type: object
+      required:
+      - account_id
+      - amount
+      - currency
+      properties:
+        account_id:
+          type: string
+          description: Destination account ID
+        amount:
+          type: number
+          format: float
+        currency:
+          type: string
+        description:
+          type: string
+        reference_id:
+          type: string
     Transfer:
       type: object
       properties:
@@ -84,25 +103,6 @@ components:
         created_date:
           type: string
           format: date-time
-    CreateTransferRequest:
-      type: object
-      required:
-      - account_id
-      - amount
-      - currency
-      properties:
-        account_id:
-          type: string
-          description: Destination account ID
-        amount:
-          type: number
-          format: float
-        currency:
-          type: string
-        description:
-          type: string
-        reference_id:
-          type: string
   securitySchemes:
     HmacAuth:
       type: apiKey

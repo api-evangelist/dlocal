@@ -64,6 +64,33 @@ paths:
                 $ref: '#/components/schemas/KycStatus'
 components:
   schemas:
+    KycStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - NOT_SUBMITTED
+          - PENDING
+          - APPROVED
+          - REJECTED
+        rejection_reason:
+          type: string
+        updated_date:
+          type: string
+          format: date-time
+    KycRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - INDIVIDUAL
+          - BUSINESS
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/KycDocument'
     KycDocument:
       type: object
       properties:
@@ -80,33 +107,6 @@ components:
           enum:
           - FRONT
           - BACK
-    KycRequest:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - INDIVIDUAL
-          - BUSINESS
-        documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/KycDocument'
-    KycStatus:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - NOT_SUBMITTED
-          - PENDING
-          - APPROVED
-          - REJECTED
-        rejection_reason:
-          type: string
-        updated_date:
-          type: string
-          format: date-time
   securitySchemes:
     HmacAuth:
       type: apiKey
