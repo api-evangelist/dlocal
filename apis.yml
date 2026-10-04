@@ -46,6 +46,7 @@ tags:
   - Asia
   - Local Payment Methods
   - Payment Processing
+  - Cross-Border Payments
 tags_raw:
   - Payments
   - Emerging Markets
@@ -57,6 +58,7 @@ tags_raw:
   - Asia
   - Local Payment Methods
   - Payment Processing
+  - Cross-Border Payments
 apis:
 - name: dLocal Payouts API
   description: >-
