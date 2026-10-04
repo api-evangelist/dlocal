@@ -90,28 +90,6 @@ paths:
           description: Bank account removed
 components:
   schemas:
-    BankAccountRequest:
-      type: object
-      required:
-      - type
-      - number
-      - bank_code
-      properties:
-        type:
-          type: string
-          enum:
-          - CHECKING
-          - SAVINGS
-        number:
-          type: string
-        agency:
-          type: string
-        bank_code:
-          type: string
-        holder_name:
-          type: string
-        document:
-          type: string
     BankAccountRecord:
       type: object
       properties:
@@ -138,6 +116,28 @@ components:
         created_date:
           type: string
           format: date-time
+    BankAccountRequest:
+      type: object
+      required:
+      - type
+      - number
+      - bank_code
+      properties:
+        type:
+          type: string
+          enum:
+          - CHECKING
+          - SAVINGS
+        number:
+          type: string
+        agency:
+          type: string
+        bank_code:
+          type: string
+        holder_name:
+          type: string
+        document:
+          type: string
   securitySchemes:
     HmacAuth:
       type: apiKey

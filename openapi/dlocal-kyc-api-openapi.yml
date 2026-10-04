@@ -64,6 +64,22 @@ paths:
                 $ref: '#/components/schemas/KycStatus'
 components:
   schemas:
+    KycDocument:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Document type (ID, PASSPORT, UTILITY_BILL, etc.)
+        filename:
+          type: string
+        content:
+          type: string
+          description: Base64-encoded document content
+        side:
+          type: string
+          enum:
+          - FRONT
+          - BACK
     KycStatus:
       type: object
       properties:
@@ -91,22 +107,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/KycDocument'
-    KycDocument:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Document type (ID, PASSPORT, UTILITY_BILL, etc.)
-        filename:
-          type: string
-        content:
-          type: string
-          description: Base64-encoded document content
-        side:
-          type: string
-          enum:
-          - FRONT
-          - BACK
   securitySchemes:
     HmacAuth:
       type: apiKey

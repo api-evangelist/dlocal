@@ -97,6 +97,36 @@ paths:
                       $ref: '#/components/schemas/Balance'
 components:
   schemas:
+    CreateAccountRequest:
+      type: object
+      required:
+      - name
+      - email
+      - document
+      - country
+      properties:
+        merchant_id:
+          type: string
+          description: Merchant-assigned identifier for the sub-account
+        name:
+          type: string
+          description: Business or individual name
+        email:
+          type: string
+          format: email
+        document:
+          type: string
+          description: Tax or national ID number
+        document_type:
+          type: string
+          description: Document type (e.g. CPF, CNPJ, DNI)
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
     Account:
       type: object
       properties:
@@ -130,35 +160,14 @@ components:
         created_date:
           type: string
           format: date-time
-    CreateAccountRequest:
+    Error:
       type: object
-      required:
-      - name
-      - email
-      - document
-      - country
       properties:
-        merchant_id:
+        code:
+          type: integer
+        message:
           type: string
-          description: Merchant-assigned identifier for the sub-account
-        name:
-          type: string
-          description: Business or individual name
-        email:
-          type: string
-          format: email
-        document:
-          type: string
-          description: Tax or national ID number
-        document_type:
-          type: string
-          description: Document type (e.g. CPF, CNPJ, DNI)
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-        address:
-          $ref: '#/components/schemas/Address'
-        phone:
+        param:
           type: string
     Balance:
       type: object
@@ -188,15 +197,6 @@ components:
         zip_code:
           type: string
         country:
-          type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-        param:
           type: string
   securitySchemes:
     HmacAuth:

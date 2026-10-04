@@ -157,26 +157,6 @@ paths:
                 $ref: '#/components/schemas/Payout'
 components:
   schemas:
-    BankAccount:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - C
-          - S
-          description: Account type - C for Checking, S for Savings
-        number:
-          type: string
-        agency:
-          type: string
-        bank_code:
-          type: string
-        clabe:
-          type: string
-          description: CLABE number for Mexico
-        iban:
-          type: string
     Payout:
       type: object
       properties:
@@ -219,14 +199,25 @@ components:
           format: date-time
         transaction_id:
           type: string
-    Error:
+    BankAccount:
       type: object
       properties:
-        code:
-          type: integer
-        message:
+        type:
           type: string
-        param:
+          enum:
+          - C
+          - S
+          description: Account type - C for Checking, S for Savings
+        number:
+          type: string
+        agency:
+          type: string
+        bank_code:
+          type: string
+        clabe:
+          type: string
+          description: CLABE number for Mexico
+        iban:
           type: string
     Beneficiary:
       type: object
@@ -256,6 +247,15 @@ components:
           $ref: '#/components/schemas/BankAccount'
         mobile_wallet:
           $ref: '#/components/schemas/MobileWallet'
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        param:
+          type: string
     CreatePayoutRequest:
       type: object
       required:
@@ -314,6 +314,13 @@ components:
         fx_quote_id:
           type: string
           description: FX quote ID to lock in exchange rate
+    MobileWallet:
+      type: object
+      properties:
+        phone:
+          type: string
+        provider:
+          type: string
     Address:
       type: object
       properties:
@@ -328,13 +335,6 @@ components:
         zip_code:
           type: string
         country:
-          type: string
-    MobileWallet:
-      type: object
-      properties:
-        phone:
-          type: string
-        provider:
           type: string
   securitySchemes:
     HmacAuth:
