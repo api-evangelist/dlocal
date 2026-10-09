@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: dLocal Plans and Pricing
 description: dLocal uses a custom enterprise pricing model tailored to each merchant's transaction volume, target markets, and payment method mix across emerging markets in Africa, Asia, and Latin America. Pricing includes setup fees, monthly account management fees, and per-transaction fees negotiated based on expected volumes. No self-serve public pricing tiers are published; merchants must contact sales for a quote.
 version: "0.1"
@@ -32,3 +36,16 @@ plans:
       - Minimum fee commitments may apply based on expected volumes
       - Contact dLocal sales team for a custom quote
       - Two-factor authentication required on merchant accounts
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - negotiated
+  units: []
+  plans:
+  - name: Enterprise Custom
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
