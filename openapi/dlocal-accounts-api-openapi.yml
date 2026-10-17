@@ -97,35 +97,29 @@ paths:
                       $ref: '#/components/schemas/Balance'
 components:
   schemas:
-    CreateAccountRequest:
+    Error:
       type: object
-      required:
-      - name
-      - email
-      - document
-      - country
       properties:
-        merchant_id:
+        code:
+          type: integer
+        message:
           type: string
-          description: Merchant-assigned identifier for the sub-account
-        name:
+        param:
           type: string
-          description: Business or individual name
-        email:
+    Address:
+      type: object
+      properties:
+        street:
           type: string
-          format: email
-        document:
+        number:
           type: string
-          description: Tax or national ID number
-        document_type:
+        city:
           type: string
-          description: Document type (e.g. CPF, CNPJ, DNI)
+        state:
+          type: string
+        zip_code:
+          type: string
         country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code
-        address:
-          $ref: '#/components/schemas/Address'
-        phone:
           type: string
     Account:
       type: object
@@ -160,14 +154,35 @@ components:
         created_date:
           type: string
           format: date-time
-    Error:
+    CreateAccountRequest:
       type: object
+      required:
+      - name
+      - email
+      - document
+      - country
       properties:
-        code:
-          type: integer
-        message:
+        merchant_id:
           type: string
-        param:
+          description: Merchant-assigned identifier for the sub-account
+        name:
+          type: string
+          description: Business or individual name
+        email:
+          type: string
+          format: email
+        document:
+          type: string
+          description: Tax or national ID number
+        document_type:
+          type: string
+          description: Document type (e.g. CPF, CNPJ, DNI)
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code
+        address:
+          $ref: '#/components/schemas/Address'
+        phone:
           type: string
     Balance:
       type: object
@@ -183,21 +198,6 @@ components:
         pending_amount:
           type: number
           format: float
-    Address:
-      type: object
-      properties:
-        street:
-          type: string
-        number:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zip_code:
-          type: string
-        country:
-          type: string
   securitySchemes:
     HmacAuth:
       type: apiKey

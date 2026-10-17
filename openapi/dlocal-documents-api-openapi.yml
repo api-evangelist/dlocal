@@ -74,28 +74,6 @@ paths:
                       $ref: '#/components/schemas/DocumentRecord'
 components:
   schemas:
-    DocumentRecord:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-        side:
-          type: string
-        filename:
-          type: string
-        status:
-          type: string
-          enum:
-          - PENDING
-          - ACCEPTED
-          - REJECTED
-        rejection_reason:
-          type: string
-        uploaded_date:
-          type: string
-          format: date-time
     DocumentUploadRequest:
       type: object
       required:
@@ -126,6 +104,28 @@ components:
         content:
           type: string
           description: Base64-encoded document content
+    DocumentRecord:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        side:
+          type: string
+        filename:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - ACCEPTED
+          - REJECTED
+        rejection_reason:
+          type: string
+        uploaded_date:
+          type: string
+          format: date-time
   securitySchemes:
     HmacAuth:
       type: apiKey
