@@ -71,6 +71,11 @@ apis:
   tags:
   - Payouts
   - Disbursements
+  - Foreign Exchange
+  - Mass Payments
+  tags_raw:
+  - Payouts
+  - Disbursements
   - Currency Exchange
   - Mass Payments
   properties:
