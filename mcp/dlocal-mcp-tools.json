@@ -1,0 +1,35 @@
+{
+  "endpoint": "https://mcp.dlocal.com/integration",
+  "captured": "2026-10-20",
+  "method": "initialize + tools/list (anonymous, no tool called; roadmap#992)",
+  "protocol_version": "2025-06-18",
+  "server_info": {
+    "name": "dlocal-mcp-pub",
+    "version": "0.1.2"
+  },
+  "result": {
+    "tools": [
+      {
+        "name": "dLocal_docs_overview",
+        "description": "Search dLocal documentation and return the most relevant snippets for a natural-language query.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "query": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      }
+    ]
+  }
+}
