@@ -87,3 +87,116 @@
     detected: '2026-10-21'
   status: not-a-workflow
   arazzo: null
+- slug: dlocal-eba-payment-institutions-register-psd2-emd2
+  label: EBA Payment Institutions Register (PSD2 / EMD2)
+  partner_name: EBA Payment Institutions Register (PSD2 / EMD2)
+  category: EU/EEA PSD2 payment / e-money authorisation
+  type: register
+  channel: regulator-register
+  evidence: https://euclid.eba.europa.eu/register/pir/search
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: EBA Payment Institutions Register (PSD2 / EMD2)
+    spec_file: null
+    standard: null
+    role: authorised-payment-or-e-money-institution
+    registrations:
+    - registered_name: DLOCAL LIMITED
+      licences:
+      - electronic money institution
+      register_country: MT
+      register_id: MT_MFSA!EGL
+      matched_domain: null
+      matched_by: register-name
+      authorised: '2016-11-14'
+      competent_authority: MT_MFSA
+      commercial_name: DLOCAL LIMITED
+      national_ref: C77538
+      home_services:
+      - ES_010
+      - PS_03A
+      - PS_03B
+      - PS_03C
+      - PS_04A
+      - PS_04B
+      - PS_04C
+      - PS_05A
+      - PS_05B
+      - PS_060
+      passports:
+      - AT
+      - BE
+      - BG
+      - CY
+      - CZ
+      - DE
+      - DK
+      - EE
+      - ES
+      - FI
+      - FR
+      - GR
+      - HR
+      - HU
+      - IE
+      - IS
+      - IT
+      - LI
+      - LT
+      - LU
+      - LV
+      - NL
+      - 'NO'
+      - PL
+      - PT
+      - RO
+      - SE
+      - SI
+      - SK
+      register_name_note: register-name 'dlocal' = dlocal; wikidata P856 dlocal.com agrees or unheld
+    matched_by: register-name
+    signal_note: 'participation only: a regulator authorisation / registration and its PSD2 passports (host countries);
+      no API conformance is published by this register'
+    detected_by: sweep-eu-psd2-payment-institutions.py
+    detected: '2026-10-21'
+    identity_source: register-name
+    identity_note: register gave only the name; exact normalised match to the repo's apis.yml name, one repo, Wikidata
+      P856 not contradicting (Kin 2026-10-20 decision 2)
+  status: not-a-workflow
+  arazzo: null
+- slug: dlocal-banco-central-do-brasil-authorized-payment-institutions-institui-es-de-pagamento
+  label: Banco Central do Brasil authorized payment institutions (Instituições de Pagamento)
+  partner_name: Banco Central do Brasil authorized payment institutions (Instituições de Pagamento)
+  category: Brazil BCB-authorized payment institution (IP)
+  type: register
+  channel: regulator-register
+  evidence: https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Banco Central do Brasil authorized payment institutions (Instituições de Pagamento)
+    spec_file: null
+    standard: null
+    role: authorized-payment-institution
+    institution_class: fintech
+    registrations:
+    - registered_name: DLOCAL BRASIL INSTITUIÇÃO DE PAGAMENTO S.A.
+      register_status: authorized-active
+      register_country: BR
+      register_id: CNPJ 25021356
+      segment: Instituição de Pagamento
+      matched_domain: dlocal.com
+      matched_by: domain
+      evidence_url: https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento
+      licences:
+      - Instituição de Pagamento
+      situation: Autorizada em Atividade
+      tariff_list_confirmed: true
+      domain_source: filed-website
+    signal_note: 'participation only: a Banco Central do Brasil authorisation to operate; no API conformance is
+      published by this register'
+    detected_by: sweep-brazil-bcb-authorized-institutions.py
+    detected: '2026-10-22'
+  status: not-a-workflow
+  arazzo: null
